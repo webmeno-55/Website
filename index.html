@@ -24,6 +24,45 @@
       display: none;
     }
 </style>
+
+  <style>
+.custom-toggler {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0.5rem;
+  position: relative;
+  z-index: 9999;
+}
+.toggler-icon {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: #000;
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+.navbar-toggler.collapsed .top-bar {
+  transform: rotate(0) translateY(0);
+}
+.navbar-toggler:not(.collapsed) .top-bar {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.navbar-toggler.collapsed .middle-bar {
+  opacity: 1;
+}
+.navbar-toggler:not(.collapsed) .middle-bar {
+  opacity: 0;
+}
+.navbar-toggler.collapsed .bottom-bar {
+  transform: rotate(0) translateY(0);
+}
+.navbar-toggler:not(.collapsed) .bottom-bar {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+  </style>
+  
 </head>
 <body>
   <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
@@ -32,9 +71,12 @@
       <img src="assets/images/logo_full_light_without_bg.webp" class="logo-default" height="40" alt="Logo">
       <img src="assets/images/light_logo_without_bg.png" class="logo-scrolled" height="40" alt="Logo">
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+  <span class="toggler-icon top-bar"></span>
+  <span class="toggler-icon middle-bar"></span>
+  <span class="toggler-icon bottom-bar"></span>
+</button>
+
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
