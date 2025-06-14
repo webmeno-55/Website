@@ -7,6 +7,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
   <link href="assets/css/style.css" rel="stylesheet">
 <style>
+    /* Navbar scrolling effect */
     .navbar {
       transition: all 0.3s ease;
     }
@@ -23,46 +24,28 @@
     .navbar:not(.scrolled) .logo-scrolled {
       display: none;
     }
+
+    /* Simple toggle button styles */
+    .navbar-toggler {
+      border: none;
+      background: none;
+      outline: none;
+      padding: 0.5rem;
+      position: relative;
+      z-index: 9999;
+    }
+    .navbar-toggler-icon {
+      /* Bootstrap's default icon */
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* Offcanvas specific styling for better appearance */
+    .offcanvas {
+        background-color: white; /* Or any color you prefer for the menu background */
+        width: 250px; /* Adjust as needed */
+    }
 </style>
 
-  <style>
-.custom-toggler {
-  border: none;
-  background: none;
-  outline: none;
-  padding: 0.5rem;
-  position: relative;
-  z-index: 9999;
-}
-.toggler-icon {
-  display: block;
-  width: 25px;
-  height: 3px;
-  margin: 5px auto;
-  background-color: #000;
-  transition: all 0.3s ease-in-out;
-  border-radius: 2px;
-}
-.navbar-toggler.collapsed .top-bar {
-  transform: rotate(0) translateY(0);
-}
-.navbar-toggler:not(.collapsed) .top-bar {
-  transform: rotate(45deg) translate(5px, 5px);
-}
-.navbar-toggler.collapsed .middle-bar {
-  opacity: 1;
-}
-.navbar-toggler:not(.collapsed) .middle-bar {
-  opacity: 0;
-}
-.navbar-toggler.collapsed .bottom-bar {
-  transform: rotate(0) translateY(0);
-}
-.navbar-toggler:not(.collapsed) .bottom-bar {
-  transform: rotate(-45deg) translate(5px, -5px);
-}
-  </style>
-  
 </head>
 <body>
   <nav class="navbar navbar-expand-lg fixed-top bg-transparent">
@@ -71,26 +54,31 @@
       <img src="assets/images/logo_full_light_without_bg.webp" class="logo-default" height="40" alt="Logo">
       <img src="assets/images/light_logo_without_bg.png" class="logo-scrolled" height="40" alt="Logo">
     </a>
-    <button class="navbar-toggler custom-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-  <span class="toggler-icon top-bar"></span>
-  <span class="toggler-icon middle-bar"></span>
-  <span class="toggler-icon bottom-bar"></span>
-</button>
 
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-        <li class="nav-item"><a class="nav-link" href="vendor/files/Company Profile Webmeno.pdf">Company Profile</a></li>
-        <li class="nav-item"><a class="nav-link" href="#" download>Contact</a></li>
-      </ul>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="vendor/files/Company Profile Webmeno.pdf">Company Profile</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" download>Contact</a></li>
+        </ul>
+      </div>
     </div>
+
   </div>
 </nav>
 
-<div style="height: 2000px; padding-top: 100px;"> <!-- Sample content for scroll -->
-  <h1 class="text-center mt-5">Scroll to See Navbar Change</h1>
+<div style="height: 2000px; padding-top: 100px;"> <h1 class="text-center mt-5">Scroll to See Navbar Change</h1>
 </div>
 
   <script>
@@ -103,7 +91,6 @@
     }
   });
   </script>
-
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
