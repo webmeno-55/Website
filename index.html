@@ -140,7 +140,51 @@
     drop-shadow(0 0 20px rgba(2, 2, 2, 1));
   transform: rotate(-35deg);
     }
-    
+
+    /* Responsive adjustments for nav_client_btn */
+    @media (max-width: 992px) { /* For small to medium screens (Bootstrap's 'lg' breakpoint) */
+      .nav_client_btn {
+        padding: 0.8rem 1.5rem; /* Reduce padding */
+        font-size: 1rem; /* Reduce font size */
+      }
+      .nav_client_btn .inner-button {
+        width: 35px; /* Reduce inner button size */
+        height: 35px;
+        margin-left: 8px; /* Adjust margin */
+      }
+      .nav_client_btn .inner-button .icon {
+        height: 25px; /* Reduce icon size */
+        width: 25px;
+      }
+    }
+
+    @media (max-width: 768px) { /* For extra small to small screens (Bootstrap's 'md' breakpoint) */
+      .nav_client_btn {
+        padding: 0.6rem 1.2rem; /* Further reduce padding */
+        font-size: 0.9rem; /* Further reduce font size */
+      }
+      .nav_client_btn .inner-button {
+        width: 30px; /* Further reduce inner button size */
+        height: 30px;
+        margin-left: 6px; /* Adjust margin */
+      }
+      .nav_client_btn .inner-button .icon {
+        height: 20px; /* Further reduce icon size */
+        width: 20px;
+      }
+    }
+
+    @media (max-width: 576px) { /* For very small screens (Bootstrap's 'sm' breakpoint) */
+      .nav_client_btn {
+        width: 100%; /* Make button full width in offcanvas */
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        margin-top: 1rem; /* Add some top margin */
+      }
+      .nav_client_btn .inner-button {
+        display: none; /* Hide the icon on very small screens if desired, or adjust size */
+      }
+    }
   </style>
 
 </head>
@@ -201,7 +245,7 @@
         <div class="mt-3">
           Social Links
         </div>
-               
+
         <div class="d-flex gap-3 mt-2">
         <a class="text-light" href="https://www.facebook.com/profile.php?id=61573678858679">
           <i class="fa-brands fa-facebook"></i>
@@ -236,4 +280,4 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
-              </html>
+</html>
