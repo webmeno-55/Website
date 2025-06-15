@@ -54,9 +54,9 @@
 
     /* Offcanvas specific styling for better appearance */
     .offcanvas {
-        background-color: red; /* Or any color you prefer for the menu background */
+        background-color: #000; /* Or any color you prefer for the menu background */
         width: 250px; /* Adjust as needed */
-        
+
     }
     .offcanvas-body{
       color: #fff;
@@ -64,6 +64,16 @@
     }
     .offcanvas-body a{
       text-decoration: none;
+    }
+
+    /* Hide the menu icon when offcanvas is showing */
+    .offcanvas.show ~ .navbar-toggler .menu-icon {
+      display: none;
+    }
+    /* Ensure the close button is visible and styled correctly */
+    .offcanvas-header .btn-close {
+        filter: invert(1); /* This will make the default dark close button white */
+        opacity: 1; /* Ensure full visibility */
     }
 </style>
 
@@ -199,7 +209,8 @@
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <i class="fas fa-bars menu-icon"></i> </button>
+      <i class="fas fa-bars menu-icon"></i>
+    </button>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
@@ -208,8 +219,7 @@
             <img src="assets/images/logo_full_light_without_bg.webp" height="50" alt="Logo">
           </a>
         </h5>
-        <button type="button" class="btn-close text-light" data-bs-dismiss="offcanvas" aria-label="Close">
-          
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close">
         </button>
       </div>
       <div class="offcanvas-body">
@@ -284,4 +294,4 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
-</html>
+        </html>
