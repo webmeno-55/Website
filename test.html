@@ -54,9 +54,9 @@
             font-size: 4.8em;
             margin-bottom: 25px;
             line-height: 1.2;
-            color: #ffffff;
+            color: #ffffff; /* Pure white for heading */
             font-weight: 800;
-            letter-spacing: -2px;
+            letter-spacing: -2px; /* Tighter letter spacing */
         }
 
         .hero-content p {
@@ -116,7 +116,6 @@
         }
 
         /* Generating multiple grid lines with varying positions for a denser grid */
-        /* This is an example, you'd typically use a preprocessor or JS for many lines */
         .grid-line-h:nth-child(1) { top: 10%; }
         .grid-line-h:nth-child(2) { top: 20%; }
         .grid-line-h:nth-child(3) { top: 30%; }
@@ -154,6 +153,11 @@
         .grid-node:nth-child(20) { top: 60%; left: 70%; animation-delay: 0.8s; }
         .grid-node:nth-child(21) { top: 20%; left: 50%; animation-delay: 1.4s; }
         .grid-node:nth-child(22) { top: 80%; left: 40%; animation-delay: 2.0s; }
+        .grid-node:nth-child(23) { top: 10%; left: 80%; animation-delay: 0.5s; }
+        .grid-node:nth-child(24) { top: 90%; left: 15%; animation-delay: 1.1s; }
+        .grid-node:nth-child(25) { top: 50%; left: 90%; animation-delay: 1.7s; }
+        .grid-node:nth-child(26) { top: 45%; left: 5%; animation-delay: 2.3s; }
+
 
         @keyframes nodePulse {
             0% { transform: scale(1); opacity: 0.7; }
@@ -222,6 +226,45 @@
                 opacity: 0.05; /* Even more subtle on small screens */
             }
         }
+
+        /* --- Sample Sections Styles --- */
+        .sample-section {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #0f0f0f; /* Slightly lighter black for sections */
+            border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
+        }
+
+        .sample-section h2 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #ffffff;
+            font-weight: 700;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.4);
+        }
+
+        .sample-section p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #e0e0e0;
+            margin-bottom: 20px;
+        }
+
+        .sample-section.red-accent {
+            background-color: #1a0a0a; /* Darker red-tinted background */
+            border-top-color: rgba(255, 51, 51, 0.1);
+        }
+
+        .sample-section.red-accent h2 {
+             color: #ff3333; /* Red heading for this section */
+        }
+
+        /* Smooth scroll for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
     </style>
 </head>
 <body>
@@ -266,18 +309,41 @@
         </div>
     </section>
 
+    ---
+    <section id="about" class="sample-section">
+        <h2>About Our Expertise</h2>
+        <p>We are a leading software development company dedicated to crafting high-performance, scalable, and secure digital solutions. Our team of experienced engineers, designers, and strategists works collaboratively to bring your most ambitious ideas to life, ensuring cutting-edge technology and exceptional user experiences.</p>
+        <p>From custom enterprise applications to innovative mobile apps and robust cloud infrastructures, we partner with businesses to navigate the complexities of the digital landscape and achieve their strategic goals.</p>
+    </section>
+
+    ---
+    <section id="services" class="sample-section red-accent">
+        <h2>Our Core Services</h2>
+        <p>At the heart of our operations lies a commitment to excellence across a spectrum of services. We specialize in bespoke **web development**, intuitive **mobile applications**, sophisticated **AI & Machine Learning** solutions, and comprehensive **cloud computing** integration.</p>
+        <p>Each project is approached with meticulous planning and agile methodologies, ensuring transparency, efficiency, and superior quality from concept to deployment. Let us build the future with you.</p>
+    </section>
+
+    ---
+    <section id="contact" class="sample-section">
+        <h2>Get in Touch</h2>
+        <p>Ready to transform your ideas into reality? Our team is eager to discuss your next project. We believe in building lasting relationships through open communication and delivering impactful results.</p>
+        <p>Connect with us today to schedule a consultation and discover how our expertise can accelerate your business's digital journey. We're here to help you innovate, develop, and excel.</p>
+    </section>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const hero3dModelContainer = document.getElementById('interactive3d');
 
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
-                const scrollPercentage = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+                // Calculate scroll percentage relative to the entire page height
+                const totalScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercentage = totalScrollHeight > 0 ? scrollY / totalScrollHeight : 0;
 
                 // Rotate the 3D model container based on scroll
                 // Adjust sensitivity as needed
-                const rotateX = scrollPercentage * 60; // Rotate up to 60 degrees on X-axis
-                const rotateY = scrollPercentage * 120; // Rotate up to 120 degrees on Y-axis (for a subtle sideways tilt)
+                const rotateX = scrollPercentage * 90; // Rotate up to 90 degrees on X-axis (more pronounced)
+                const rotateY = scrollPercentage * 180; // Rotate up to 180 degrees on Y-axis (more dynamic)
 
                 hero3dModelContainer.style.transform = `
                     translate(-50%, -50%)
@@ -287,9 +353,10 @@
 
                 // Optionally, make the grid "move" or shift based on scroll
                 const gridContainer = hero3dModelContainer.querySelector('.grid-container');
-                const translateGridY = scrollPercentage * 50; // Move grid up/down
-                const rotateGridZ = scrollPercentage * 360; // Rotate grid Z-axis
+                const translateGridY = scrollPercentage * 100; // More aggressive Y-translation
+                const rotateGridZ = scrollPercentage * 720; // More aggressive Z-rotation (two full turns)
 
+                // Ensure the base rotation is maintained
                 gridContainer.style.transform = `
                     rotateX(70deg)
                     rotateZ(${rotateGridZ}deg)
@@ -298,6 +365,5 @@
             });
         });
     </script>
-
-    </body>
-</html>
+</body>
+                                           </html>
