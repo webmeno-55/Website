@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Scroll Animation - Responsive</title>
+    <title>3D Scroll Animation - Black Gradient</title>
     <!-- Tailwind CSS CDN for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Three.js CDN for 3D rendering -->
@@ -14,79 +14,33 @@
             margin: 0;
             overflow-x: hidden; /* Prevent horizontal scroll */
             font-family: 'Inter', sans-serif; /* Use Inter font */
-            /* Background color will be handled by the fixed 3D container */
+            background-color: #000000; /* Pure black background for the entire page */
+            color: #e2e8f0; /* Light text color for readability */
         }
 
-        /* The 3D container acts as a fixed background across the entire page */
-        #three-container {
-            position: fixed; /* Keep it fixed in the viewport */
-            top: 0;
-            left: 0;
-            width: 100vw; /* Full viewport width */
-            height: 100vh; /* Full viewport height */
-            z-index: -1; /* Place it behind all other content */
-            background-color: #1a202c; /* Dark background for the 3D section */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        canvas {
-            display: block; /* Remove extra space below canvas */
-            width: 100%;
-            height: 100%;
-        }
-
-        /* Styles for content sections */
+        /* Base styles for content sections */
         .content-section {
             height: 100vh; /* Each section fills the viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center; /* Center text on mobile by default */
+            text-align: center; /* Center text for all content sections on mobile/default */
             padding: 2rem;
             box-sizing: border-box;
             color: #e2e8f0; /* Light text color */
-            /* Semi-transparent background for readability over the 3D animation */
-            background-color: rgba(30, 41, 59, 0.95); /* A dark slate blue with transparency */
+            /* Gradient shades of black for content sections */
+            background: linear-gradient(180deg, #1a1a1a, #0d0d0d); /* From dark gray to darker gray */
         }
-        /* Alternate background for content sections */
+        /* Alternate gradient for even content sections */
         .content-section:nth-child(even) {
-            background-color: rgba(26, 32, 44, 0.95); /* Even darker with transparency */
+            background: linear-gradient(180deg, #0d0d0d, #000000); /* From darker gray to pure black */
         }
 
-        /* Specific styles for the first section to handle desktop split layout */
-        .first-section-wrapper {
-            min-height: 100vh;
-            display: flex; /* Use flexbox */
-            flex-direction: column; /* Stack columns on mobile */
-            align-items: stretch; /* Stretch items to fill height */
-            position: relative; /* Needed for z-index to work against fixed background */
-            z-index: 10; /* Ensure content is above the fixed 3D background */
-        }
-
-        /* Desktop specific styles for the first section */
-        @media (min-width: 768px) { /* Tailwind's 'md' breakpoint */
-            .first-section-wrapper {
-                flex-direction: row; /* Arrange columns horizontally on desktop */
-            }
-            .text-column {
-                width: 50%; /* Text takes left half on desktop */
-                text-align: left; /* Align text to left on desktop */
-                background-color: rgba(30, 41, 59, 0.95); /* Opaque background for text on desktop */
-                border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners on left side only */
-                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            }
-            .animation-placeholder-column {
-                width: 50%; /* Placeholder takes right half on desktop */
-                display: flex; /* Show this column on desktop */
-                background-color: transparent; /* Transparent background to reveal fixed 3D */
-            }
-        }
-
+        /* Specific styling for headings and paragraphs */
         h2 {
             font-size: 3rem;
             font-weight: bold;
-            color: #a0aec0;
+            color: #a0aec0; /* Lighter gray for headings */
         }
         p {
             font-size: 1.25rem;
@@ -94,99 +48,162 @@
             max-width: 800px;
             margin-top: 1rem;
         }
+
+        /* --- First Section Specific Styles --- */
+        /* This wrapper handles the responsive layout for the first section */
+        .first-section-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack columns on mobile (text on top of animation background) */
+            position: relative; /* Essential for positioning the 3D container as background */
+        }
+
+        /* The Three.js container */
+        #three-container {
+            /* Mobile: Absolute positioning to cover the entire first section as a background */
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Place it behind the text content */
+            display: flex; /* Used to center the cube within its bounds */
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Hide anything outside the container */
+            background-color: #111111; /* Very dark gray for the 3D section base */
+        }
+        #three-container canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Text column in the first section */
+        .text-column {
+            width: 100%; /* Full width on mobile */
+            z-index: 10; /* Place text above the 3D background */
+            flex-grow: 1; /* Allows text column to take available space */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center text content horizontally and vertically on mobile */
+            padding: 2rem;
+            box-sizing: border-box;
+            /* Semi-transparent black background for text on mobile for readability over animation */
+            background-color: rgba(10, 10, 10, 0.9);
+            border-radius: 0.5rem; /* Rounded corners for consistency */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .text-column .max-w-xl {
+            text-align: center; /* Ensure text is centered within the max-width div on mobile */
+        }
+
+        /* Desktop specific styles for the first section */
+        @media (min-width: 768px) { /* Tailwind's 'md' breakpoint */
+            .first-section-wrapper {
+                flex-direction: row; /* Arrange columns horizontally on desktop */
+            }
+            #three-container {
+                /* Desktop: Becomes the right half, relative within flex container */
+                position: relative;
+                width: 50%;
+                height: 100%;
+                z-index: initial; /* Reset z-index */
+            }
+            .text-column {
+                width: 50%; /* Text takes left half on desktop */
+                text-align: left; /* Align text to left on desktop */
+                justify-content: flex-start; /* Align content to the start (left) */
+                /* Fully opaque black background on desktop for solid appearance */
+                background-color: #000000;
+                border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners on left side only */
+                box-shadow: none; /* Remove shadow on desktop for cleaner split */
+            }
+            .text-column .max-w-xl {
+                text-align: left; /* Ensure text is left-aligned within the max-width div on desktop */
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- This container holds the Three.js canvas and acts as a fixed background -->
-    <div id="three-container">
-        <!-- The Three.js canvas will be appended here by JavaScript -->
-    </div>
+    <!-- First Section: Contains the 3D animation and text content -->
+    <section class="first-section-wrapper">
+        <!-- This div is the 3D animation container. It will be background on mobile, right on desktop. -->
+        <div id="three-container">
+            <!-- Canvas will be appended here by Three.js -->
+        </div>
 
-    <!-- Main content wrapper to ensure all content is above the fixed 3D background -->
-    <div class="relative z-10">
-
-        <!-- First Section: Responsive Layout (Text on Left/Animation on Right for Desktop, Background Animation for Mobile) -->
-        <section class="first-section-wrapper">
-            <!-- Text Content Column -->
-            <div class="text-column w-full flex items-center justify-center p-8">
-                <div class="max-w-xl mx-auto">
-                    <h2 class="text-5xl font-extrabold mb-4 text-white">Interactive 3D Experience</h2>
-                    <p class="text-xl leading-relaxed text-gray-300">
-                        Witness the power of dynamic web design. This immersive 3D animation
-                        reacts to your scroll, offering a unique visual journey, adapting seamlessly
-                        across desktop and mobile devices.
-                    </p>
-                </div>
-            </div>
-            <!-- Placeholder for Animation on Desktop. On mobile, this column is hidden.
-                 It's transparent to let the fixed 'three-container' show through. -->
-            <div class="animation-placeholder-column w-full hidden items-center justify-center">
-                <!-- No actual content here, just a transparent window to the fixed 3D animation behind it -->
-            </div>
-        </section>
-
-        <!-- Sample content sections to demonstrate scroll effect -->
-        <section class="content-section">
-            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
-                <h2 class="text-5xl font-extrabold mb-4">Welcome to our Dynamic Page</h2>
-                <p class="text-xl leading-relaxed">
-                    Scroll down to see the magic happen! Our 3D model will react to your scrolling,
-                    creating an interactive and engaging experience. This section serves as a placeholder
-                    to make the page scrollable.
+        <!-- Text Content Column -->
+        <div class="text-column">
+            <div class="max-w-xl mx-auto">
+                <h2 class="text-5xl font-extrabold mb-4 text-white">Interactive 3D Experience</h2>
+                <p class="text-xl leading-relaxed text-gray-300">
+                    Witness the power of dynamic web design. This immersive 3D animation
+                    reacts to your scroll, offering a unique visual journey, adapting seamlessly
+                    across desktop and mobile devices.
                 </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section class="content-section">
-            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
-                <h2 class="text-5xl font-extrabold mb-4">Explore New Dimensions</h2>
-                <p class="text-xl leading-relaxed">
-                    The digital world is vast and full of possibilities. With 3D elements, we can
-                    bring your content to life in ways never before imagined. This is just another sample
-                    section to demonstrate continuous scrolling.
-                </p>
-            </div>
-        </section>
+    <!-- Sample content sections (simple, solid background with gradient shades of black) -->
+    <section class="content-section">
+        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
+            <h2 class="text-5xl font-extrabold mb-4">Welcome to our Dynamic Page</h2>
+            <p class="text-xl leading-relaxed">
+                Scroll down to see the magic happen! Our 3D model is featured prominently
+                in the section above. These sections provide additional content space.
+            </p>
+        </div>
+    </section>
 
-        <section class="content-section">
-            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
-                <h2 class="text-5xl font-extrabold mb-4">Interactive Experiences</h2>
-                <p class="text-xl leading-relaxed">
-                    We believe in creating engaging and memorable web experiences.
-                    The seamless integration of 3D and scroll effects is just one way to achieve this.
-                    Keep scrolling for more!
-                </p>
-            </div>
-        </section>
+    <section class="content-section">
+        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
+            <h2 class="text-5xl font-extrabold mb-4">Explore New Dimensions</h2>
+            <p class="text-xl leading-relaxed">
+                The digital world is vast and full of possibilities. Here, you can
+                showcase more information or engaging content without the 3D element.
+            </p>
+        </div>
+    </section>
 
-        <section class="content-section">
-            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
-                <h2 class="text-5xl font-extrabold mb-4">The End (for now)</h2>
-                <p class="text-xl leading-relaxed">
-                    You've reached the end of our scroll demonstration. We hope you enjoyed
-                    the interactive 3D experience. Feel free to scroll back up and try again!
-                </p>
-            </div>
-        </section>
+    <section class="content-section">
+        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
+            <h2 class="text-5xl font-extrabold mb-4">Interactive Experiences</h2>
+            <p class="text-xl leading-relaxed">
+                We believe in creating engaging and memorable web experiences.
+                This structure allows for a strong visual impact in the hero section,
+                followed by clear content presentation.
+            </p>
+        </div>
+    </section>
 
-    </div> <!-- End of main-content-wrapper -->
+    <section class="content-section">
+        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
+            <h2 class="text-5xl font-extrabold mb-4">The End (for now)</h2>
+            <p class="text-xl leading-relaxed">
+                You've reached the end of our scroll demonstration. We hope you enjoyed
+                the focused 3D experience and the structured layout.
+            </p>
+        </div>
+    </section>
 
     <script>
         // Ensure the script runs after the window has loaded
         window.onload = function() {
-            // Get the container for the Three.js scene (this is now always fixed and full screen)
+            // Get the container for the Three.js scene
             const container = document.getElementById('three-container');
 
             // --- Scene Setup ---
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            // Camera aspect ratio and renderer size will be set dynamically based on container
+            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
             camera.position.z = 5;
 
             const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight); // Renderer always takes full window size
             container.appendChild(renderer.domElement);
-            renderer.setClearColor(0x1a202c, 1); // Dark background for the renderer
+            renderer.setClearColor(0x111111, 1); // Very dark gray background for the 3D section itself
 
             // --- Object Creation (Professional Metallic Cube) ---
             const geometry = new THREE.BoxGeometry(1, 1, 1);
@@ -225,31 +242,48 @@
                 cube.rotation.x += 0.005;
                 cube.rotation.y += 0.005;
 
-                const totalScrollHeight = document.body.scrollHeight - window.innerHeight;
-                const normalizedScroll = totalScrollHeight > 0 ? scrollY / totalScrollHeight : 0;
+                // Only apply scroll effect if the 3D section is in view
+                const firstSection = document.querySelector('.first-section-wrapper');
+                if (firstSection) {
+                    const rect = firstSection.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
 
-                // Adjust cube's position (e.g., move up/down slightly)
-                cube.position.y = Math.sin(normalizedScroll * Math.PI * 4) * 0.5;
+                    if (isVisible) {
+                        const sectionHeight = firstSection.clientHeight;
+                        const sectionTop = firstSection.offsetTop;
+                        const scrollProgressInSection = Math.max(0, Math.min(1, (scrollY - sectionTop + window.innerHeight) / (sectionHeight + window.innerHeight)));
 
-                // Adjust cube's scale (e.g., gets slightly bigger/smaller)
-                const scaleFactor = 1 + Math.sin(normalizedScroll * Math.PI * 2) * 0.2;
-                cube.scale.set(scaleFactor, scaleFactor, scaleFactor);
+                        cube.position.y = Math.sin(scrollProgressInSection * Math.PI * 4) * 0.5;
+                        const scaleFactor = 1 + Math.sin(scrollProgressInSection * Math.PI * 2) * 0.2;
+                        cube.scale.set(scaleFactor, scaleFactor, scaleFactor);
+                    }
+                }
 
                 renderer.render(scene, camera);
             }
 
             // --- Handle Window Resizes ---
             window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
+                const containerWidth = container.clientWidth;
+                const containerHeight = container.clientHeight;
+
+                camera.aspect = containerWidth / containerHeight;
                 camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                renderer.setSize(containerWidth, containerHeight);
                 renderer.render(scene, camera);
             });
+
+            // Initial setup for renderer and camera size based on container's initial dimensions
+            const initialContainerWidth = container.clientWidth;
+            const initialContainerHeight = container.clientHeight;
+            camera.aspect = initialContainerWidth / initialContainerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(initialContainerWidth, initialContainerHeight);
 
             // Start the animation loop
             animate();
         };
     </script>
 </body>
-  </html>
-              
+</html>
