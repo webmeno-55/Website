@@ -1,369 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Development - Interactive Hero</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* General Body Styles */
-        body {
-            margin: 0;
-            font-family: 'Montserrat', sans-serif;
-            background-color: #000000; /* Fallback for older browsers */
-            color: #ffffff;
-            overflow-x: hidden; /* Prevent horizontal scroll for the entire page */
-        }
+import { useEffect, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import * as THREE from 'three';
 
-        /* Hero Section Styles */
-        .hero-section {
-            position: relative;
-            width: 100%;
-            height: 100vh; /* Full viewport height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* Creative Gradient Background */
-            background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0a0a0a);
-            background-size: 200% 200%; /* For animating the gradient */
-            animation: gradientAnimation 15s ease infinite; /* Smooth gradient animation */
-            color: #ffffff;
-            text-align: center;
-            perspective: 1200px; /* For 3D effects */
-            padding: 0 20px;
-            overflow: hidden; /* Crucial: Ensures no overflow from within this section */
-        }
+function RotatingBox() {
+  const meshRef = useRef();
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += 0.01;
+    }
+  });
+  return (
+    <mesh ref={meshRef} position={[0, 0, 0]}>
+      <boxGeometry args={[1.5, 1.5, 1.5]} />
+      <meshStandardMaterial color={'white'} />
+    </mesh>
+  );
+}
 
-        /* Gradient Animation Keyframes */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-content {
-            z-index: 10; /* Ensure content is above the 3D model */
-            max-width: 900px;
-            padding: 20px;
-            position: relative;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-        }
-
-        .hero-content h1 {
-            font-size: 4.8em;
-            margin-bottom: 25px;
-            line-height: 1.2;
-            color: #ffffff; /* Pure white for heading */
-            font-weight: 800;
-            letter-spacing: -2px; /* Tighter letter spacing */
-        }
-
-        .hero-content p {
-            font-size: 1.8em;
-            margin-bottom: 0;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        /* NEW 3D Model: Abstract Network Grid */
-        .hero-3d-model-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform-style: preserve-3d;
-            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); /* Initial state, will be updated by JS */
-            width: 100vw; /* Occupy full viewport width */
-            height: 100vh; /* Occupy full viewport height */
-            z-index: 5;
-            pointer-events: none;
-            overflow: hidden; /* Important for scroll effect not to cause overflow */
-        }
-
-        .grid-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transform-style: preserve-3d;
-            transform: rotateX(70deg) rotateZ(0deg); /* Tilt the grid for a 3D floor effect */
-            animation: gridFlow 60s infinite linear; /* Slow, continuous grid movement */
-            opacity: 0.15; /* Subtle visibility */
-        }
-
-        @keyframes gridFlow {
-            0% { transform: rotateX(70deg) rotateZ(0deg) translateY(-20%); }
-            100% { transform: rotateX(70deg) rotateZ(360deg) translateY(20%); } /* Combine Z-rotation with Y-translation */
-        }
-
-        .grid-line-h, .grid-line-v {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.08); /* Very subtle white lines */
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
-        }
-
-        .grid-line-h { /* Horizontal lines */
-            width: 200vw; /* Extend beyond screen to prevent gaps during scroll/animation */
-            height: 1px;
-            left: -50vw; /* Center horizontally */
-        }
-
-        .grid-line-v { /* Vertical lines */
-            width: 1px;
-            height: 200vh; /* Extend beyond screen */
-            top: -50vh; /* Center vertically */
-        }
-
-        /* Generating multiple grid lines with varying positions for a denser grid */
-        .grid-line-h:nth-child(1) { top: 10%; }
-        .grid-line-h:nth-child(2) { top: 20%; }
-        .grid-line-h:nth-child(3) { top: 30%; }
-        .grid-line-h:nth-child(4) { top: 40%; }
-        .grid-line-h:nth-child(5) { top: 50%; }
-        .grid-line-h:nth-child(6) { top: 60%; }
-        .grid-line-h:nth-child(7) { top: 70%; }
-        .grid-line-h:nth-child(8) { top: 80%; }
-        .grid-line-h:nth-child(9) { top: 90%; }
-
-        .grid-line-v:nth-child(10) { left: 10%; }
-        .grid-line-v:nth-child(11) { left: 20%; }
-        .grid-line-v:nth-child(12) { left: 30%; }
-        .grid-line-v:nth-child(13) { left: 40%; }
-        .grid-line-v:nth-child(14) { left: 50%; }
-        .grid-line-v:nth-child(15) { left: 60%; }
-        .grid-line-v:nth-child(16) { left: 70%; }
-        .grid-line-v:nth-child(17) { left: 80%; }
-        .grid-line-v:nth-child(18) { left: 90%; }
-
-        /* Connections/Nodes (Subtle Red Dots) */
-        .grid-node {
-            position: absolute;
-            width: 8px; /* Smaller nodes */
-            height: 8px;
-            background-color: #ff3333; /* Red color */
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ff3333;
-            animation: nodePulse 3s infinite alternate;
-            opacity: 0.7;
-        }
-
-        /* Example node positions (you'd generate more dynamically with JS if needed) */
-        .grid-node:nth-child(19) { top: 35%; left: 25%; animation-delay: 0.2s; }
-        .grid-node:nth-child(20) { top: 60%; left: 70%; animation-delay: 0.8s; }
-        .grid-node:nth-child(21) { top: 20%; left: 50%; animation-delay: 1.4s; }
-        .grid-node:nth-child(22) { top: 80%; left: 40%; animation-delay: 2.0s; }
-        .grid-node:nth-child(23) { top: 10%; left: 80%; animation-delay: 0.5s; }
-        .grid-node:nth-child(24) { top: 90%; left: 15%; animation-delay: 1.1s; }
-        .grid-node:nth-child(25) { top: 50%; left: 90%; animation-delay: 1.7s; }
-        .grid-node:nth-child(26) { top: 45%; left: 5%; animation-delay: 2.3s; }
-
-
-        @keyframes nodePulse {
-            0% { transform: scale(1); opacity: 0.7; }
-            100% { transform: scale(1.4); opacity: 1; }
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 1200px) {
-            .hero-content h1 {
-                font-size: 4em;
-            }
-            .hero-content p {
-                font-size: 1.6em;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 3.4em;
-            }
-            .hero-content p {
-                font-size: 1.4em;
-            }
-            .grid-container {
-                opacity: 0.1;
-            }
-            .grid-node {
-                width: 6px;
-                height: 6px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero-section {
-                height: 80vh;
-                padding-top: 10vh;
-            }
-            .hero-content h1 {
-                font-size: 2.8em;
-                margin-bottom: 15px;
-            }
-            .hero-content p {
-                font-size: 1.2em;
-            }
-            .grid-container {
-                opacity: 0.08;
-            }
-            .grid-node {
-                width: 5px;
-                height: 5px;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-section {
-                height: 70vh;
-                padding-top: 8vh;
-            }
-            .hero-content h1 {
-                font-size: 2.2em;
-            }
-            .hero-content p {
-                font-size: 1em;
-            }
-            .grid-container {
-                opacity: 0.05; /* Even more subtle on small screens */
-            }
-        }
-
-        /* --- Sample Sections Styles --- */
-        .sample-section {
-            padding: 80px 20px;
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #0f0f0f; /* Slightly lighter black for sections */
-            border-top: 1px solid rgba(255, 255, 255, 0.05); /* Subtle separator */
-        }
-
-        .sample-section h2 {
-            font-size: 3em;
-            margin-bottom: 30px;
-            color: #ffffff;
-            font-weight: 700;
-            text-shadow: 0 3px 8px rgba(0,0,0,0.4);
-        }
-
-        .sample-section p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: #e0e0e0;
-            margin-bottom: 20px;
-        }
-
-        .sample-section.red-accent {
-            background-color: #1a0a0a; /* Darker red-tinted background */
-            border-top-color: rgba(255, 51, 51, 0.1);
-        }
-
-        .sample-section.red-accent h2 {
-             color: #ff3333; /* Red heading for this section */
-        }
-
-        /* Smooth scroll for anchor links */
-        html {
-            scroll-behavior: smooth;
-        }
-    </style>
-</head>
-<body>
-    <section class="hero-section">
-        <div class="hero-content">
-            <h1>Innovate. Develop. Excel.</h1>
-            <p>Your vision, our code. Transforming ideas into robust software solutions.</p>
+export default function HeroSection() {
+  return (
+    <div className="w-full min-h-screen bg-black text-white">
+      <section className="h-screen flex items-center justify-center relative z-10">
+        <div className="absolute inset-0 -z-10">
+          <Canvas camera={{ position: [0, 0, 5] }}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[2, 2, 5]} />
+            <OrbitControls enableZoom={false} enablePan={false} />
+            <RotatingBox />
+          </Canvas>
         </div>
-        <div class="hero-3d-model-container" id="interactive3d">
-            <div class="grid-container">
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-h"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-line-v"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-                <div class="grid-node"></div>
-            </div>
+        <div className="text-center px-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">Creative 3D Experience</h1>
+          <p className="text-lg md:text-2xl max-w-xl mx-auto">
+            Scroll down to explore the immersive layout powered by 3D and motion.
+          </p>
         </div>
-    </section>
+      </section>
 
-    ---
-    <section id="about" class="sample-section">
-        <h2>About Our Expertise</h2>
-        <p>We are a leading software development company dedicated to crafting high-performance, scalable, and secure digital solutions. Our team of experienced engineers, designers, and strategists works collaboratively to bring your most ambitious ideas to life, ensuring cutting-edge technology and exceptional user experiences.</p>
-        <p>From custom enterprise applications to innovative mobile apps and robust cloud infrastructures, we partner with businesses to navigate the complexities of the digital landscape and achieve their strategic goals.</p>
-    </section>
+      <section className="h-screen bg-zinc-900 flex items-center justify-center">
+        <h2 className="text-3xl md:text-5xl">Scroll Section One</h2>
+      </section>
 
-    ---
-    <section id="services" class="sample-section red-accent">
-        <h2>Our Core Services</h2>
-        <p>At the heart of our operations lies a commitment to excellence across a spectrum of services. We specialize in bespoke **web development**, intuitive **mobile applications**, sophisticated **AI & Machine Learning** solutions, and comprehensive **cloud computing** integration.</p>
-        <p>Each project is approached with meticulous planning and agile methodologies, ensuring transparency, efficiency, and superior quality from concept to deployment. Let us build the future with you.</p>
-    </section>
+      <section className="h-screen bg-zinc-800 flex items-center justify-center">
+        <h2 className="text-3xl md:text-5xl">Scroll Section Two</h2>
+      </section>
 
-    ---
-    <section id="contact" class="sample-section">
-        <h2>Get in Touch</h2>
-        <p>Ready to transform your ideas into reality? Our team is eager to discuss your next project. We believe in building lasting relationships through open communication and delivering impactful results.</p>
-        <p>Connect with us today to schedule a consultation and discover how our expertise can accelerate your business's digital journey. We're here to help you innovate, develop, and excel.</p>
-    </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const hero3dModelContainer = document.getElementById('interactive3d');
-
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                // Calculate scroll percentage relative to the entire page height
-                const totalScrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercentage = totalScrollHeight > 0 ? scrollY / totalScrollHeight : 0;
-
-                // Rotate the 3D model container based on scroll
-                // Adjust sensitivity as needed
-                const rotateX = scrollPercentage * 90; // Rotate up to 90 degrees on X-axis (more pronounced)
-                const rotateY = scrollPercentage * 180; // Rotate up to 180 degrees on Y-axis (more dynamic)
-
-                hero3dModelContainer.style.transform = `
-                    translate(-50%, -50%)
-                    rotateX(${rotateX}deg)
-                    rotateY(${rotateY}deg)
-                `;
-
-                // Optionally, make the grid "move" or shift based on scroll
-                const gridContainer = hero3dModelContainer.querySelector('.grid-container');
-                const translateGridY = scrollPercentage * 100; // More aggressive Y-translation
-                const rotateGridZ = scrollPercentage * 720; // More aggressive Z-rotation (two full turns)
-
-                // Ensure the base rotation is maintained
-                gridContainer.style.transform = `
-                    rotateX(70deg)
-                    rotateZ(${rotateGridZ}deg)
-                    translateY(${translateGridY}%)
-                `;
-            });
-        });
-    </script>
-</body>
-                                           </html>
+      <section className="h-screen bg-zinc-700 flex items-center justify-center">
+        <h2 className="text-3xl md:text-5xl">Scroll Section Three</h2>
+      </section>
+    </div>
+  );
+}
+                
