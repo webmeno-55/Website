@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Development Company - Hero</title>
+    <title>Software Development - Creative Hero</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
         /* General Body Styles */
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: #000000; /* Pure black background */
-            color: #ffffff; /* Pure white for general text */
+            background-color: #000000; /* Fallback for older browsers, overridden by hero gradient */
+            color: #ffffff;
             overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
@@ -24,12 +24,22 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            background: linear-gradient(135deg, #000000, #1a1a1a); /* Subtle dark gradient for depth */
+            /* Creative Gradient Background */
+            background: linear-gradient(135deg, #0a0a0a, #1a1a1a, #0a0a0a);
+            background-size: 200% 200%; /* For animating the gradient */
+            animation: gradientAnimation 15s ease infinite; /* Smooth gradient animation */
             color: #ffffff;
             text-align: center;
             perspective: 1200px; /* For 3D effects */
             padding: 0 20px;
+            overflow: hidden; /* Ensure no overflow from within this section */
+        }
+
+        /* Gradient Animation Keyframes */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .hero-content {
@@ -37,61 +47,37 @@
             max-width: 900px;
             padding: 20px;
             position: relative;
-            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6); /* Slightly more pronounced shadow on white text */
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
         }
 
         .hero-content h1 {
-            font-size: 4.2em;
+            font-size: 4.8em; /* Slightly larger heading */
             margin-bottom: 25px;
             line-height: 1.2;
             color: #ffffff; /* Pure white for heading */
             font-weight: 800;
-            letter-spacing: -1px;
-            /* Optional: subtle gradient on white text if you want a hint of dimension */
-            /* background: linear-gradient(45deg, #ffffff, #f0f0f0); */
-            /* -webkit-background-clip: text; */
-            /* -webkit-text-fill-color: transparent; */
+            letter-spacing: -2px; /* Tighter letter spacing */
         }
 
         .hero-content p {
-            font-size: 1.6em;
-            margin-bottom: 50px;
-            opacity: 0.9; /* Keep it slightly less bright than heading */
+            font-size: 1.8em; /* Slightly larger paragraph */
+            margin-bottom: 0; /* No button, so no bottom margin needed */
+            opacity: 0.9;
             font-weight: 300;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 18px 35px;
-            background-color: #e02f2f; /* A subtle, modern red */
-            color: #ffffff; /* White text on red button */
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.3em;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 25px rgba(224, 47, 47, 0.4); /* Red shadow */
-            letter-spacing: 0.5px;
-        }
-
-        .cta-button:hover {
-            background-color: #c92a2a; /* Slightly darker red on hover */
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(224, 47, 47, 0.6); /* More prominent red shadow */
-        }
-
-        /* 3D Model Animation (Tech Sphere) */
+        /* 3D Model Animation (More visible and central) */
         .hero-3d-model-container {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px; /* Base size of the 3D model area */
-            height: 400px;
-            perspective: 1000px;
-            z-index: 5; /* Below content, above background */
+            width: 600px; /* Much larger base size */
+            height: 600px;
+            perspective: 1500px; /* Deeper perspective for 3D effect */
+            z-index: 5; /* Below content */
             pointer-events: none; /* Allows clicks to pass through */
-            opacity: 0.1; /* Very subtle background element */
+            opacity: 0.2; /* More visible than before */
         }
 
         .tech-sphere {
@@ -99,51 +85,51 @@
             width: 100%;
             height: 100%;
             transform-style: preserve-3d;
-            animation: rotateSphere 30s infinite linear; /* Continuous rotation */
+            animation: rotateSphere 40s infinite linear; /* Slower, more subtle rotation */
         }
 
         .ring {
             position: absolute;
-            border: 2px solid rgba(255, 255, 255, 0.2); /* Subtle white glow for rings */
+            border: 3px solid rgba(255, 255, 255, 0.3); /* Thicker, brighter white glow for rings */
             border-radius: 50%;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3); /* White shadow */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* More prominent white shadow */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
         }
 
         .ring1 {
-            width: 300px;
-            height: 300px;
-            animation: rotateRing1 15s infinite linear;
+            width: 450px; /* Scaled up with container */
+            height: 450px;
+            animation: rotateRing1 20s infinite linear;
         }
 
         .ring2 {
-            width: 250px;
-            height: 250px;
-            transform: translate(-50%, -50%) rotateX(70deg); /* Tilt for 3D effect */
-            animation: rotateRing2 18s infinite linear reverse;
+            width: 380px; /* Scaled up with container */
+            height: 380px;
+            transform: translate(-50%, -50%) rotateX(75deg); /* Slightly more tilt */
+            animation: rotateRing2 25s infinite linear reverse;
         }
 
         .dot {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background-color: #e02f2f; /* Red dots */
+            width: 16px; /* Larger dots */
+            height: 16px;
+            background-color: #ff3333; /* Slightly brighter red for contrast */
             border-radius: 50%;
-            box-shadow: 0 0 10px #e02f2f; /* Red shadow for dots */
-            animation: pulseDot 2s infinite alternate;
+            box-shadow: 0 0 15px #ff3333; /* Brighter red shadow for dots */
+            animation: pulseDot 2.5s infinite alternate;
         }
 
-        .dot1 { top: 10%; left: 20%; animation-delay: 0s; }
-        .dot2 { bottom: 15%; right: 25%; animation-delay: 0.7s; }
-        .dot3 { top: 40%; left: 60%; animation-delay: 1.4s; }
+        .dot1 { top: 15%; left: 25%; animation-delay: 0s; }
+        .dot2 { bottom: 20%; right: 30%; animation-delay: 0.8s; }
+        .dot3 { top: 30%; left: 70%; animation-delay: 1.6s; }
 
 
         /* Keyframe Animations */
         @keyframes rotateSphere {
-            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateX(10deg); }
-            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateX(10deg); }
+            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateX(15deg) rotateZ(0deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateX(15deg) rotateZ(360deg); } /* Added Z rotation */
         }
 
         @keyframes rotateRing1 {
@@ -152,36 +138,59 @@
         }
 
         @keyframes rotateRing2 {
-            0% { transform: translate(-50%, -50%) rotateX(70deg) rotateY(0deg); }
-            100% { transform: translate(-50%, -50%) rotateX(70deg) rotateY(360deg); }
+            0% { transform: translate(-50%, -50%) rotateX(75deg) rotateY(0deg); }
+            100% { transform: translate(-50%, -50%) rotateX(75deg) rotateY(360deg); }
         }
 
         @keyframes pulseDot {
             0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.2); opacity: 0.7; }
+            100% { transform: scale(1.3); opacity: 0.8; } /* More pronounced pulse */
         }
 
 
         /* Responsive Adjustments */
         @media (max-width: 1200px) {
             .hero-content h1 {
-                font-size: 3.6em;
+                font-size: 4em;
+            }
+            .hero-content p {
+                font-size: 1.6em;
+            }
+            .hero-3d-model-container {
+                width: 500px;
+                height: 500px;
+            }
+            .ring1 { width: 380px; height: 380px; }
+            .ring2 { width: 320px; height: 320px; }
+            .dot { width: 14px; height: 14px; }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.4em;
             }
             .hero-content p {
                 font-size: 1.4em;
             }
             .hero-3d-model-container {
-                width: 350px;
-                height: 350px;
+                width: 400px;
+                height: 400px;
+                opacity: 0.15;
             }
-            .ring1 { width: 260px; height: 260px; }
-            .ring2 { width: 210px; height: 210px; }
-            .dot { width: 10px; height: 10px; }
+            .ring1 { width: 300px; height: 300px; }
+            .ring2 { width: 250px; height: 250px; }
+            .dot { width: 12px; height: 12px; }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 80vh;
+                justify-content: flex-start;
+                padding-top: 10vh;
+            }
             .hero-content h1 {
-                font-size: 3em;
+                font-size: 2.8em;
+                margin-bottom: 15px;
             }
             .hero-content p {
                 font-size: 1.2em;
@@ -189,64 +198,34 @@
             .hero-3d-model-container {
                 width: 300px;
                 height: 300px;
-                opacity: 0.08; /* Make it even more subtle */
-            }
-            .ring1 { width: 220px; height: 220px; }
-            .ring2 { width: 180px; height: 180px; }
-            .dot { width: 8px; height: 8px; }
-        }
-
-        @media (max-width: 768px) {
-            .hero-section {
-                height: 85vh;
-                justify-content: flex-start;
-                padding-top: 10vh;
-            }
-            .hero-content h1 {
-                font-size: 2.6em;
-                margin-bottom: 15px;
-            }
-            .hero-content p {
-                font-size: 1.1em;
-                margin-bottom: 30px;
-            }
-            .cta-button {
-                padding: 14px 28px;
-                font-size: 1.1em;
-            }
-            .hero-3d-model-container {
-                width: 250px;
-                height: 250px;
-                opacity: 0.06;
+                opacity: 0.1;
                 top: auto;
                 bottom: 5%;
                 transform: translateX(-50%);
             }
-            .ring1 { width: 180px; height: 180px; }
-            .ring2 { width: 150px; height: 150px; }
+            .ring1 { width: 220px; height: 220px; }
+            .ring2 { width: 180px; height: 180px; }
+            .dot { width: 10px; height: 10px; }
         }
 
         @media (max-width: 576px) {
             .hero-section {
-                height: 80vh;
+                height: 70vh;
                 padding-top: 8vh;
             }
             .hero-content h1 {
                 font-size: 2.2em;
             }
             .hero-content p {
-                font-size: 0.95em;
-            }
-            .cta-button {
-                padding: 12px 22px;
                 font-size: 1em;
             }
             .hero-3d-model-container {
-                width: 200px;
-                height: 200px;
+                width: 250px;
+                height: 250px;
             }
-            .ring1 { width: 140px; height: 140px; }
-            .ring2 { width: 110px; height: 110px; }
+            .ring1 { width: 180px; height: 180px; }
+            .ring2 { width: 140px; height: 140px; }
+            .dot { width: 8px; height: 8px; }
         }
     </style>
 </head>
@@ -255,7 +234,6 @@
         <div class="hero-content">
             <h1>Innovate. Develop. Excel.</h1>
             <p>Your vision, our code. Transforming ideas into robust software solutions.</p>
-            <a href="#services" class="cta-button">Explore Our Services</a>
         </div>
         <div class="hero-3d-model-container">
             <div class="tech-sphere">
