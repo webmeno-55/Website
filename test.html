@@ -1,213 +1,270 @@
-<style>
-  /* Hero Section Styles */
-.hero-section {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full viewport height */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: linear-gradient(135deg, #0a0e2a, #1a237e); /* Deep blue gradient */
-    color: #fff;
-    font-family: 'Montserrat', sans-serif; /* Recommended font */
-    text-align: center;
-    perspective: 1000px; /* For 3D effect */
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Development Company - Hero</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styles (for dark theme) */
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif; /* A clean, modern font */
+            background-color: #0f121a; /* Very dark background for the entire page */
+            color: #e0e6f0; /* Light off-white for general text */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
 
-.hero-content {
-    z-index: 2; /* Ensure content is above the 3D scene */
-    max-width: 800px;
-    padding: 20px;
-    position: relative;
-}
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e2a, #0f121a); /* Subtle dark gradient */
+            color: #fff;
+            text-align: center;
+            perspective: 1200px; /* For 3D effects */
+            padding: 0 20px; /* Add some horizontal padding */
+        }
 
-.hero-content h1 {
-    font-size: 3.8em;
-    margin-bottom: 20px;
-    line-height: 1.2;
-    background: linear-gradient(45deg, #a7c0ff, #82b1ff); /* Lighter blue gradient for text */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+        .hero-content {
+            z-index: 10; /* Ensure content is above the 3D model */
+            max-width: 900px;
+            padding: 20px;
+            position: relative;
+            text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
 
-.hero-content p {
-    font-size: 1.5em;
-    margin-bottom: 40px;
-    opacity: 0.9;
-    font-weight: 300;
-}
+        .hero-content h1 {
+            font-size: 4.2em;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            background: linear-gradient(45deg, #82b1ff, #a7c0ff); /* Lighter blue gradient for text */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
 
-.cta-button {
-    display: inline-block;
-    padding: 15px 30px;
-    background-color: #00e676; /* Vibrant green */
-    color: #0a0e2a;
-    text-decoration: none;
-    border-radius: 50px;
-    font-size: 1.2em;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0, 230, 118, 0.4);
-}
+        .hero-content p {
+            font-size: 1.6em;
+            margin-bottom: 50px;
+            opacity: 0.85;
+            font-weight: 300;
+        }
 
-.cta-button:hover {
-    background-color: #00c853; /* Slightly darker green on hover */
-    transform: translateY(-3px);
-    box-shadow: 0 12px 25px rgba(0, 230, 118, 0.6);
-}
+        .cta-button {
+            display: inline-block;
+            padding: 18px 35px;
+            background-color: #00e676; /* Vibrant green */
+            color: #0a0e2a; /* Dark text for contrast */
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0, 230, 118, 0.4);
+            letter-spacing: 0.5px;
+        }
 
-/* 3D Scene Styles */
-.hero-3d-scene {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotateX(45deg) rotateY(45deg); /* Initial 3D rotation */
-    width: 300px; /* Base size, will scale */
-    height: 300px;
-    transform-style: preserve-3d;
-    animation: rotate3D 25s infinite linear; /* Continuous rotation */
-    opacity: 0.15; /* Subtle background element */
-    pointer-events: none; /* Allows clicks to pass through to content */
-    z-index: 1;
-}
+        .cta-button:hover {
+            background-color: #00c853; /* Slightly darker green on hover */
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 230, 118, 0.6);
+        }
 
-.cube {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: rgba(130, 177, 255, 0.1); /* Semi-transparent blue for cube faces */
-    border: 1px solid rgba(130, 177, 255, 0.3);
-    box-shadow: 0 0 20px rgba(130, 177, 255, 0.2);
-}
+        /* 3D Model Animation (Tech Sphere) */
+        .hero-3d-model-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; /* Base size of the 3D model area */
+            height: 400px;
+            perspective: 1000px;
+            z-index: 5; /* Below content, above background */
+            pointer-events: none; /* Allows clicks to pass through */
+            opacity: 0.2; /* Subtle background element */
+        }
 
-.cube-front { transform: translateZ(150px); }
-.cube-back { transform: translateZ(-150px) rotateY(180deg); }
-.cube-top { transform: rotateX(90deg) translateZ(150px); }
-.cube-bottom { transform: rotateX(-90deg) translateZ(150px); }
-.cube-left { transform: rotateY(-90deg) translateZ(150px); }
-.cube-right { transform: rotateY(90deg) translateZ(150px); }
+        .tech-sphere {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            animation: rotateSphere 30s infinite linear; /* Continuous rotation */
+        }
 
-/* Keyframe Animation for 3D Cube Rotation */
-@keyframes rotate3D {
-    0% { transform: translate(-50%, -50%) rotateX(45deg) rotateY(0deg); }
-    100% { transform: translate(-50%, -50%) rotateX(45deg) rotateY(360deg); }
-}
+        .ring {
+            position: absolute;
+            border: 2px solid rgba(130, 177, 255, 0.4); /* Blueish glow */
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(130, 177, 255, 0.6);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
-/* Responsive Adjustments */
-@media (max-width: 1200px) {
-    .hero-content h1 {
-        font-size: 3.2em;
-    }
-    .hero-content p {
-        font-size: 1.3em;
-    }
-    .hero-3d-scene {
-        width: 250px;
-        height: 250px;
-    }
-    .cube-front, .cube-back, .cube-top, .cube-bottom, .cube-left, .cube-right {
-        transform: translateZ(125px); /* Adjust for smaller cube */
-    }
-    .cube-back { transform: translateZ(-125px) rotateY(180deg); }
-    .cube-top { transform: rotateX(90deg) translateZ(125px); }
-    .cube-bottom { transform: rotateX(-90deg) translateZ(125px); }
-    .cube-left { transform: rotateY(-90deg) translateZ(125px); }
-    .cube-right { transform: rotateY(90deg) translateZ(125px); }
-}
+        .ring1 {
+            width: 300px;
+            height: 300px;
+            animation: rotateRing1 15s infinite linear;
+        }
 
-@media (max-width: 992px) {
-    .hero-content h1 {
-        font-size: 2.8em;
-    }
-    .hero-content p {
-        font-size: 1.2em;
-    }
-    .hero-3d-scene {
-        width: 200px;
-        height: 200px;
-    }
-    .cube-front, .cube-back, .cube-top, .cube-bottom, .cube-left, .cube-right {
-        transform: translateZ(100px); /* Adjust for smaller cube */
-    }
-    .cube-back { transform: translateZ(-100px) rotateY(180deg); }
-    .cube-top { transform: rotateX(90deg) translateZ(100px); }
-    .cube-bottom { transform: rotateX(-90deg) translateZ(100px); }
-    .cube-left { transform: rotateY(-90deg) translateZ(100px); }
-    .cube-right { transform: rotateY(90deg) translateZ(100px); }
-}
+        .ring2 {
+            width: 250px;
+            height: 250px;
+            transform: translate(-50%, -50%) rotateX(70deg); /* Tilt for 3D effect */
+            animation: rotateRing2 18s infinite linear reverse;
+        }
 
-@media (max-width: 768px) {
-    .hero-section {
-        height: 80vh; /* Slightly smaller height on mobile */
-    }
-    .hero-content h1 {
-        font-size: 2.4em;
-        margin-bottom: 15px;
-    }
-    .hero-content p {
-        font-size: 1em;
-        margin-bottom: 30px;
-    }
-    .cta-button {
-        padding: 12px 25px;
-        font-size: 1.1em;
-    }
-    .hero-3d-scene {
-        width: 150px;
-        height: 150px;
-        opacity: 0.1; /* Even more subtle on smaller screens */
-    }
-    .cube-front, .cube-back, .cube-top, .cube-bottom, .cube-left, .cube-right {
-        transform: translateZ(75px); /* Adjust for smaller cube */
-    }
-    .cube-back { transform: translateZ(-75px) rotateY(180deg); }
-    .cube-top { transform: rotateX(90deg) translateZ(75px); }
-    .cube-bottom { transform: rotateX(-90deg) translateZ(75px); }
-    .cube-left { transform: rotateY(-90deg) translateZ(75px); }
-    .cube-right { transform: rotateY(90deg) translateZ(75px); }
-}
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background-color: #00e676; /* Vibrant green dots */
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00e676;
+            animation: pulseDot 2s infinite alternate;
+        }
 
-@media (max-width: 576px) {
-    .hero-content h1 {
-        font-size: 2em;
-    }
-    .hero-content p {
-        font-size: 0.9em;
-    }
-    .cta-button {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
-    .hero-3d-scene {
-        width: 100px;
-        height: 100px;
-    }
-    .cube-front, .cube-back, .cube-top, .cube-bottom, .cube-left, .cube-right {
-        transform: translateZ(50px); /* Adjust for smallest cube */
-    }
-    .cube-back { transform: translateZ(-50px) rotateY(180deg); }
-    .cube-top { transform: rotateX(90deg) translateZ(50px); }
-    .cube-bottom { transform: rotateX(-90deg) translateZ(50px); }
-    .cube-left { transform: rotateY(-90deg) translateZ(50px); }
-    .cube-right { transform: rotateY(90deg) translateZ(50px); }
-  }
-</style>
-<section class="hero-section">
-    <div class="hero-content">
-        <h1>Innovate. Develop. Excel.</h1>
-        <p>Your vision, our code. Transforming ideas into robust software solutions.</p>
-        <a href="#services" class="cta-button">Explore Our Services</a>
-    </div>
-    <div class="hero-3d-scene">
-        <div class="cube cube-front"></div>
-        <div class="cube cube-back"></div>
-        <div class="cube cube-top"></div>
-        <div class="cube cube-bottom"></div>
-        <div class="cube cube-left"></div>
-        <div class="cube cube-right"></div>
-    </div>
-</section>
+        .dot1 { top: 10%; left: 20%; animation-delay: 0s; }
+        .dot2 { bottom: 15%; right: 25%; animation-delay: 0.7s; }
+        .dot3 { top: 40%; left: 60%; animation-delay: 1.4s; }
+
+
+        /* Keyframe Animations */
+        @keyframes rotateSphere {
+            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateX(10deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateX(10deg); }
+        }
+
+        @keyframes rotateRing1 {
+            0% { transform: translate(-50%, -50%) rotateY(0deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg); }
+        }
+
+        @keyframes rotateRing2 {
+            0% { transform: translate(-50%, -50%) rotateX(70deg) rotateY(0deg); }
+            100% { transform: translate(-50%, -50%) rotateX(70deg) rotateY(360deg); }
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3.6em;
+            }
+            .hero-content p {
+                font-size: 1.4em;
+            }
+            .hero-3d-model-container {
+                width: 350px;
+                height: 350px;
+            }
+            .ring1 { width: 260px; height: 260px; }
+            .ring2 { width: 210px; height: 210px; }
+            .dot { width: 10px; height: 10px; }
+        }
+
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3em;
+            }
+            .hero-content p {
+                font-size: 1.2em;
+            }
+            .hero-3d-model-container {
+                width: 300px;
+                height: 300px;
+                opacity: 0.15;
+            }
+            .ring1 { width: 220px; height: 220px; }
+            .ring2 { width: 180px; height: 180px; }
+            .dot { width: 8px; height: 8px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 85vh; /* Slightly smaller height on mobile */
+                justify-content: flex-start; /* Push content to top on smaller screens */
+                padding-top: 10vh; /* Add some space from the top */
+            }
+            .hero-content h1 {
+                font-size: 2.6em;
+                margin-bottom: 15px;
+            }
+            .hero-content p {
+                font-size: 1.1em;
+                margin-bottom: 30px;
+            }
+            .cta-button {
+                padding: 14px 28px;
+                font-size: 1.1em;
+            }
+            .hero-3d-model-container {
+                width: 250px;
+                height: 250px;
+                opacity: 0.1; /* Even more subtle on smaller screens */
+                top: auto;
+                bottom: 5%; /* Position at bottom for smaller screens */
+                transform: translateX(-50%); /* Only translate X */
+            }
+            .ring1 { width: 180px; height: 180px; }
+            .ring2 { width: 150px; height: 150px; }
+        }
+
+        @media (max-width: 576px) {
+            .hero-section {
+                height: 80vh;
+                padding-top: 8vh;
+            }
+            .hero-content h1 {
+                font-size: 2.2em;
+            }
+            .hero-content p {
+                font-size: 0.95em;
+            }
+            .cta-button {
+                padding: 12px 22px;
+                font-size: 1em;
+            }
+            .hero-3d-model-container {
+                width: 200px;
+                height: 200px;
+            }
+            .ring1 { width: 140px; height: 140px; }
+            .ring2 { width: 110px; height: 110px; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Innovate. Develop. Excel.</h1>
+            <p>Your vision, our code. Transforming ideas into robust software solutions.</p>
+            <a href="#services" class="cta-button">Explore Our Services</a>
+        </div>
+        <div class="hero-3d-model-container">
+            <div class="tech-sphere">
+                <div class="ring ring1"></div>
+                <div class="ring ring2"></div>
+                <div class="dot dot1"></div>
+                <div class="dot dot2"></div>
+                <div class="dot dot3"></div>
+            </div>
+        </div>
+    </section>
+
+    </body>
+</html>
