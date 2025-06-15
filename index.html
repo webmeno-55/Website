@@ -31,7 +31,7 @@
       display: none;
     }
 
-    /* Simple toggle button styles */
+    /* Custom toggle button styles */
     .navbar-toggler {
       border: none;
       background: none;
@@ -40,9 +40,16 @@
       position: relative;
       z-index: 9999;
     }
-    .navbar-toggler-icon {
-      /* Bootstrap's default icon */
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+
+    /* Icon styling */
+    .menu-icon {
+      color: white; /* Default light color */
+      font-size: 1.5rem; /* Adjust size as needed */
+      transition: color 0.3s ease;
+    }
+
+    .navbar.scrolled .menu-icon {
+      color: #333; /* Darker color when scrolled */
     }
 
     /* Offcanvas specific styling for better appearance */
@@ -68,9 +75,7 @@
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-      <span class="navbar-toggler-icon d-none"></span>
-      <i class="fa-regular fa-bars"></i>
-    </button>
+      <i class="fas fa-bars menu-icon"></i> </button>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
@@ -127,4 +132,4 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
-</html>
+              </html>
