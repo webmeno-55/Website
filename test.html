@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Development - Creative Hero</title>
+    <title>Software Development - Interactive Hero</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
     <style>
         /* General Body Styles */
         body {
             margin: 0;
             font-family: 'Montserrat', sans-serif;
-            background-color: #000000; /* Fallback for older browsers, overridden by hero gradient */
+            background-color: #000000; /* Fallback for older browsers */
             color: #ffffff;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: hidden; /* Prevent horizontal scroll for the entire page */
         }
 
         /* Hero Section Styles */
@@ -32,7 +32,7 @@
             text-align: center;
             perspective: 1200px; /* For 3D effects */
             padding: 0 20px;
-            overflow: hidden; /* Ensure no overflow from within this section */
+            overflow: hidden; /* Crucial: Ensures no overflow from within this section */
         }
 
         /* Gradient Animation Keyframes */
@@ -51,102 +51,114 @@
         }
 
         .hero-content h1 {
-            font-size: 4.8em; /* Slightly larger heading */
+            font-size: 4.8em;
             margin-bottom: 25px;
             line-height: 1.2;
-            color: #ffffff; /* Pure white for heading */
+            color: #ffffff;
             font-weight: 800;
-            letter-spacing: -2px; /* Tighter letter spacing */
+            letter-spacing: -2px;
         }
 
         .hero-content p {
-            font-size: 1.8em; /* Slightly larger paragraph */
-            margin-bottom: 0; /* No button, so no bottom margin needed */
+            font-size: 1.8em;
+            margin-bottom: 0;
             opacity: 0.9;
             font-weight: 300;
         }
 
-        /* 3D Model Animation (More visible and central) */
+        /* NEW 3D Model: Abstract Network Grid */
         .hero-3d-model-container {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px; /* Much larger base size */
-            height: 600px;
-            perspective: 1500px; /* Deeper perspective for 3D effect */
-            z-index: 5; /* Below content */
-            pointer-events: none; /* Allows clicks to pass through */
-            opacity: 0.2; /* More visible than before */
+            transform-style: preserve-3d;
+            transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg); /* Initial state, will be updated by JS */
+            width: 100vw; /* Occupy full viewport width */
+            height: 100vh; /* Occupy full viewport height */
+            z-index: 5;
+            pointer-events: none;
+            overflow: hidden; /* Important for scroll effect not to cause overflow */
         }
 
-        .tech-sphere {
-            position: relative;
+        .grid-container {
             width: 100%;
             height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             transform-style: preserve-3d;
-            animation: rotateSphere 40s infinite linear; /* Slower, more subtle rotation */
+            transform: rotateX(70deg) rotateZ(0deg); /* Tilt the grid for a 3D floor effect */
+            animation: gridFlow 60s infinite linear; /* Slow, continuous grid movement */
+            opacity: 0.15; /* Subtle visibility */
         }
 
-        .ring {
+        @keyframes gridFlow {
+            0% { transform: rotateX(70deg) rotateZ(0deg) translateY(-20%); }
+            100% { transform: rotateX(70deg) rotateZ(360deg) translateY(20%); } /* Combine Z-rotation with Y-translation */
+        }
+
+        .grid-line-h, .grid-line-v {
             position: absolute;
-            border: 3px solid rgba(255, 255, 255, 0.3); /* Thicker, brighter white glow for rings */
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* More prominent white shadow */
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.08); /* Very subtle white lines */
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.05);
         }
 
-        .ring1 {
-            width: 450px; /* Scaled up with container */
-            height: 450px;
-            animation: rotateRing1 20s infinite linear;
+        .grid-line-h { /* Horizontal lines */
+            width: 200vw; /* Extend beyond screen to prevent gaps during scroll/animation */
+            height: 1px;
+            left: -50vw; /* Center horizontally */
         }
 
-        .ring2 {
-            width: 380px; /* Scaled up with container */
-            height: 380px;
-            transform: translate(-50%, -50%) rotateX(75deg); /* Slightly more tilt */
-            animation: rotateRing2 25s infinite linear reverse;
+        .grid-line-v { /* Vertical lines */
+            width: 1px;
+            height: 200vh; /* Extend beyond screen */
+            top: -50vh; /* Center vertically */
         }
 
-        .dot {
+        /* Generating multiple grid lines with varying positions for a denser grid */
+        /* This is an example, you'd typically use a preprocessor or JS for many lines */
+        .grid-line-h:nth-child(1) { top: 10%; }
+        .grid-line-h:nth-child(2) { top: 20%; }
+        .grid-line-h:nth-child(3) { top: 30%; }
+        .grid-line-h:nth-child(4) { top: 40%; }
+        .grid-line-h:nth-child(5) { top: 50%; }
+        .grid-line-h:nth-child(6) { top: 60%; }
+        .grid-line-h:nth-child(7) { top: 70%; }
+        .grid-line-h:nth-child(8) { top: 80%; }
+        .grid-line-h:nth-child(9) { top: 90%; }
+
+        .grid-line-v:nth-child(10) { left: 10%; }
+        .grid-line-v:nth-child(11) { left: 20%; }
+        .grid-line-v:nth-child(12) { left: 30%; }
+        .grid-line-v:nth-child(13) { left: 40%; }
+        .grid-line-v:nth-child(14) { left: 50%; }
+        .grid-line-v:nth-child(15) { left: 60%; }
+        .grid-line-v:nth-child(16) { left: 70%; }
+        .grid-line-v:nth-child(17) { left: 80%; }
+        .grid-line-v:nth-child(18) { left: 90%; }
+
+        /* Connections/Nodes (Subtle Red Dots) */
+        .grid-node {
             position: absolute;
-            width: 16px; /* Larger dots */
-            height: 16px;
-            background-color: #ff3333; /* Slightly brighter red for contrast */
+            width: 8px; /* Smaller nodes */
+            height: 8px;
+            background-color: #ff3333; /* Red color */
             border-radius: 50%;
-            box-shadow: 0 0 15px #ff3333; /* Brighter red shadow for dots */
-            animation: pulseDot 2.5s infinite alternate;
+            box-shadow: 0 0 10px #ff3333;
+            animation: nodePulse 3s infinite alternate;
+            opacity: 0.7;
         }
 
-        .dot1 { top: 15%; left: 25%; animation-delay: 0s; }
-        .dot2 { bottom: 20%; right: 30%; animation-delay: 0.8s; }
-        .dot3 { top: 30%; left: 70%; animation-delay: 1.6s; }
+        /* Example node positions (you'd generate more dynamically with JS if needed) */
+        .grid-node:nth-child(19) { top: 35%; left: 25%; animation-delay: 0.2s; }
+        .grid-node:nth-child(20) { top: 60%; left: 70%; animation-delay: 0.8s; }
+        .grid-node:nth-child(21) { top: 20%; left: 50%; animation-delay: 1.4s; }
+        .grid-node:nth-child(22) { top: 80%; left: 40%; animation-delay: 2.0s; }
 
-
-        /* Keyframe Animations */
-        @keyframes rotateSphere {
-            0% { transform: translate(-50%, -50%) rotateY(0deg) rotateX(15deg) rotateZ(0deg); }
-            100% { transform: translate(-50%, -50%) rotateY(360deg) rotateX(15deg) rotateZ(360deg); } /* Added Z rotation */
+        @keyframes nodePulse {
+            0% { transform: scale(1); opacity: 0.7; }
+            100% { transform: scale(1.4); opacity: 1; }
         }
-
-        @keyframes rotateRing1 {
-            0% { transform: translate(-50%, -50%) rotateY(0deg); }
-            100% { transform: translate(-50%, -50%) rotateY(360deg); }
-        }
-
-        @keyframes rotateRing2 {
-            0% { transform: translate(-50%, -50%) rotateX(75deg) rotateY(0deg); }
-            100% { transform: translate(-50%, -50%) rotateX(75deg) rotateY(360deg); }
-        }
-
-        @keyframes pulseDot {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.3); opacity: 0.8; } /* More pronounced pulse */
-        }
-
 
         /* Responsive Adjustments */
         @media (max-width: 1200px) {
@@ -156,13 +168,6 @@
             .hero-content p {
                 font-size: 1.6em;
             }
-            .hero-3d-model-container {
-                width: 500px;
-                height: 500px;
-            }
-            .ring1 { width: 380px; height: 380px; }
-            .ring2 { width: 320px; height: 320px; }
-            .dot { width: 14px; height: 14px; }
         }
 
         @media (max-width: 992px) {
@@ -172,20 +177,18 @@
             .hero-content p {
                 font-size: 1.4em;
             }
-            .hero-3d-model-container {
-                width: 400px;
-                height: 400px;
-                opacity: 0.15;
+            .grid-container {
+                opacity: 0.1;
             }
-            .ring1 { width: 300px; height: 300px; }
-            .ring2 { width: 250px; height: 250px; }
-            .dot { width: 12px; height: 12px; }
+            .grid-node {
+                width: 6px;
+                height: 6px;
+            }
         }
 
         @media (max-width: 768px) {
             .hero-section {
                 height: 80vh;
-                justify-content: flex-start;
                 padding-top: 10vh;
             }
             .hero-content h1 {
@@ -195,17 +198,13 @@
             .hero-content p {
                 font-size: 1.2em;
             }
-            .hero-3d-model-container {
-                width: 300px;
-                height: 300px;
-                opacity: 0.1;
-                top: auto;
-                bottom: 5%;
-                transform: translateX(-50%);
+            .grid-container {
+                opacity: 0.08;
             }
-            .ring1 { width: 220px; height: 220px; }
-            .ring2 { width: 180px; height: 180px; }
-            .dot { width: 10px; height: 10px; }
+            .grid-node {
+                width: 5px;
+                height: 5px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -219,13 +218,9 @@
             .hero-content p {
                 font-size: 1em;
             }
-            .hero-3d-model-container {
-                width: 250px;
-                height: 250px;
+            .grid-container {
+                opacity: 0.05; /* Even more subtle on small screens */
             }
-            .ring1 { width: 180px; height: 180px; }
-            .ring2 { width: 140px; height: 140px; }
-            .dot { width: 8px; height: 8px; }
         }
     </style>
 </head>
@@ -235,16 +230,74 @@
             <h1>Innovate. Develop. Excel.</h1>
             <p>Your vision, our code. Transforming ideas into robust software solutions.</p>
         </div>
-        <div class="hero-3d-model-container">
-            <div class="tech-sphere">
-                <div class="ring ring1"></div>
-                <div class="ring ring2"></div>
-                <div class="dot dot1"></div>
-                <div class="dot dot2"></div>
-                <div class="dot dot3"></div>
+        <div class="hero-3d-model-container" id="interactive3d">
+            <div class="grid-container">
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-h"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-line-v"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
+                <div class="grid-node"></div>
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const hero3dModelContainer = document.getElementById('interactive3d');
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const scrollPercentage = scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+
+                // Rotate the 3D model container based on scroll
+                // Adjust sensitivity as needed
+                const rotateX = scrollPercentage * 60; // Rotate up to 60 degrees on X-axis
+                const rotateY = scrollPercentage * 120; // Rotate up to 120 degrees on Y-axis (for a subtle sideways tilt)
+
+                hero3dModelContainer.style.transform = `
+                    translate(-50%, -50%)
+                    rotateX(${rotateX}deg)
+                    rotateY(${rotateY}deg)
+                `;
+
+                // Optionally, make the grid "move" or shift based on scroll
+                const gridContainer = hero3dModelContainer.querySelector('.grid-container');
+                const translateGridY = scrollPercentage * 50; // Move grid up/down
+                const rotateGridZ = scrollPercentage * 360; // Rotate grid Z-axis
+
+                gridContainer.style.transform = `
+                    rotateX(70deg)
+                    rotateZ(${rotateGridZ}deg)
+                    translateY(${translateGridY}%)
+                `;
+            });
+        });
+    </script>
 
     </body>
 </html>
