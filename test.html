@@ -15,6 +15,7 @@
       font-family: sans-serif;
       overflow-x: hidden;
     }
+
     .hero {
       width: 100%;
       height: 100vh;
@@ -22,9 +23,10 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      position: relative;
       text-align: center;
+      position: relative;
     }
+
     #three-container {
       position: absolute;
       top: 0;
@@ -33,19 +35,23 @@
       height: 100%;
       z-index: -1;
     }
+
     .hero-content {
-      padding: 2rem;
       z-index: 1;
+      padding: 2rem;
     }
+
     h1 {
-      font-size: 2.5em;
-      margin: 0 0 0.5em;
+      font-size: 2.5rem;
+      margin-bottom: 0.5em;
     }
+
     p {
-      font-size: 1.2em;
+      font-size: 1.2rem;
       max-width: 600px;
       margin: 0 auto;
     }
+
     .section {
       height: 100vh;
       display: flex;
@@ -53,6 +59,7 @@
       justify-content: center;
       font-size: 2em;
     }
+
     .section:nth-child(2) { background: #1a1a1a; }
     .section:nth-child(3) { background: #2a2a2a; }
     .section:nth-child(4) { background: #3a3a3a; }
@@ -64,10 +71,12 @@
         text-align: left;
         padding: 0 5%;
       }
+
       .hero-content {
         max-width: 40%;
         padding: 0;
       }
+
       #three-container {
         width: 60%;
         height: 100%;
@@ -95,7 +104,6 @@
     const container = document.getElementById('three-container');
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
