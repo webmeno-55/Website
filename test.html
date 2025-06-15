@@ -1,138 +1,255 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3D Hero Section</title>
-  <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      color: white;
-      font-family: sans-serif;
-      overflow-x: hidden;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Scroll Animation - Responsive</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Three.js CDN for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        /* Custom CSS for body to ensure full height and prevent horizontal scroll */
+        body {
+            margin: 0;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            font-family: 'Inter', sans-serif; /* Use Inter font */
+            /* Background color will be handled by the fixed 3D container */
+        }
 
-    .hero {
-      width: 100%;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
+        /* The 3D container acts as a fixed background across the entire page */
+        #three-container {
+            position: fixed; /* Keep it fixed in the viewport */
+            top: 0;
+            left: 0;
+            width: 100vw; /* Full viewport width */
+            height: 100vh; /* Full viewport height */
+            z-index: -1; /* Place it behind all other content */
+            background-color: #1a202c; /* Dark background for the 3D section */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        canvas {
+            display: block; /* Remove extra space below canvas */
+            width: 100%;
+            height: 100%;
+        }
 
-    #three-container {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-    }
+        /* Styles for content sections */
+        .content-section {
+            height: 100vh; /* Each section fills the viewport height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center; /* Center text on mobile by default */
+            padding: 2rem;
+            box-sizing: border-box;
+            color: #e2e8f0; /* Light text color */
+            /* Semi-transparent background for readability over the 3D animation */
+            background-color: rgba(30, 41, 59, 0.95); /* A dark slate blue with transparency */
+        }
+        /* Alternate background for content sections */
+        .content-section:nth-child(even) {
+            background-color: rgba(26, 32, 44, 0.95); /* Even darker with transparency */
+        }
 
-    .hero-content {
-      z-index: 1;
-      padding: 2rem;
-    }
+        /* Specific styles for the first section to handle desktop split layout */
+        .first-section-wrapper {
+            min-height: 100vh;
+            display: flex; /* Use flexbox */
+            flex-direction: column; /* Stack columns on mobile */
+            align-items: stretch; /* Stretch items to fill height */
+            position: relative; /* Needed for z-index to work against fixed background */
+            z-index: 10; /* Ensure content is above the fixed 3D background */
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5em;
-    }
+        /* Desktop specific styles for the first section */
+        @media (min-width: 768px) { /* Tailwind's 'md' breakpoint */
+            .first-section-wrapper {
+                flex-direction: row; /* Arrange columns horizontally on desktop */
+            }
+            .text-column {
+                width: 50%; /* Text takes left half on desktop */
+                text-align: left; /* Align text to left on desktop */
+                background-color: rgba(30, 41, 59, 0.95); /* Opaque background for text on desktop */
+                border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners on left side only */
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+            .animation-placeholder-column {
+                width: 50%; /* Placeholder takes right half on desktop */
+                display: flex; /* Show this column on desktop */
+                background-color: transparent; /* Transparent background to reveal fixed 3D */
+            }
+        }
 
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .section {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-    }
-
-    .section:nth-child(2) { background: #1a1a1a; }
-    .section:nth-child(3) { background: #2a2a2a; }
-    .section:nth-child(4) { background: #3a3a3a; }
-
-    @media (min-width: 768px) {
-      .hero {
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
-        padding: 0 5%;
-      }
-
-      .hero-content {
-        max-width: 40%;
-        padding: 0;
-      }
-
-      #three-container {
-        width: 60%;
-        height: 100%;
-        position: relative;
-      }
-    }
-  </style>
+        h2 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #a0aec0;
+        }
+        p {
+            font-size: 1.25rem;
+            line-height: 1.75;
+            max-width: 800px;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Creative 3D Experience</h1>
-      <p>Scroll down to explore the immersive layout powered by 3D and motion.</p>
+
+    <!-- This container holds the Three.js canvas and acts as a fixed background -->
+    <div id="three-container">
+        <!-- The Three.js canvas will be appended here by JavaScript -->
     </div>
-    <div id="three-container"></div>
-  </div>
 
-  <div class="section">Scroll Section One</div>
-  <div class="section">Scroll Section Two</div>
-  <div class="section">Scroll Section Three</div>
+    <!-- Main content wrapper to ensure all content is above the fixed 3D background -->
+    <div class="relative z-10">
 
-  <script type="module">
-    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
+        <!-- First Section: Responsive Layout (Text on Left/Animation on Right for Desktop, Background Animation for Mobile) -->
+        <section class="first-section-wrapper">
+            <!-- Text Content Column -->
+            <div class="text-column w-full flex items-center justify-center p-8">
+                <div class="max-w-xl mx-auto">
+                    <h2 class="text-5xl font-extrabold mb-4 text-white">Interactive 3D Experience</h2>
+                    <p class="text-xl leading-relaxed text-gray-300">
+                        Witness the power of dynamic web design. This immersive 3D animation
+                        reacts to your scroll, offering a unique visual journey, adapting seamlessly
+                        across desktop and mobile devices.
+                    </p>
+                </div>
+            </div>
+            <!-- Placeholder for Animation on Desktop. On mobile, this column is hidden.
+                 It's transparent to let the fixed 'three-container' show through. -->
+            <div class="animation-placeholder-column w-full hidden items-center justify-center">
+                <!-- No actual content here, just a transparent window to the fixed 3D animation behind it -->
+            </div>
+        </section>
 
-    const container = document.getElementById('three-container');
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize(container.clientWidth, container.clientHeight);
-    renderer.setPixelRatio(window.devicePixelRatio);
-    container.appendChild(renderer.domElement);
+        <!-- Sample content sections to demonstrate scroll effect -->
+        <section class="content-section">
+            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
+                <h2 class="text-5xl font-extrabold mb-4">Welcome to our Dynamic Page</h2>
+                <p class="text-xl leading-relaxed">
+                    Scroll down to see the magic happen! Our 3D model will react to your scrolling,
+                    creating an interactive and engaging experience. This section serves as a placeholder
+                    to make the page scrollable.
+                </p>
+            </div>
+        </section>
 
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+        <section class="content-section">
+            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
+                <h2 class="text-5xl font-extrabold mb-4">Explore New Dimensions</h2>
+                <p class="text-xl leading-relaxed">
+                    The digital world is vast and full of possibilities. With 3D elements, we can
+                    bring your content to life in ways never before imagined. This is just another sample
+                    section to demonstrate continuous scrolling.
+                </p>
+            </div>
+        </section>
 
-    const light = new THREE.DirectionalLight(0xffffff, 1);
-    light.position.set(2, 2, 5);
-    scene.add(light);
+        <section class="content-section">
+            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
+                <h2 class="text-5xl font-extrabold mb-4">Interactive Experiences</h2>
+                <p class="text-xl leading-relaxed">
+                    We believe in creating engaging and memorable web experiences.
+                    The seamless integration of 3D and scroll effects is just one way to achieve this.
+                    Keep scrolling for more!
+                </p>
+            </div>
+        </section>
 
-    camera.position.z = 4;
+        <section class="content-section">
+            <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6 bg-gray-700 bg-opacity-70">
+                <h2 class="text-5xl font-extrabold mb-4">The End (for now)</h2>
+                <p class="text-xl leading-relaxed">
+                    You've reached the end of our scroll demonstration. We hope you enjoyed
+                    the interactive 3D experience. Feel free to scroll back up and try again!
+                </p>
+            </div>
+        </section>
 
-    function animate() {
-      requestAnimationFrame(animate);
-      cube.rotation.y += 0.01;
-      cube.rotation.x += 0.005;
-      renderer.render(scene, camera);
-    }
-    animate();
+    </div> <!-- End of main-content-wrapper -->
 
-    window.addEventListener('resize', () => {
-      camera.aspect = container.clientWidth / container.clientHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(container.clientWidth, container.clientHeight);
-    });
-  </script>
+    <script>
+        // Ensure the script runs after the window has loaded
+        window.onload = function() {
+            // Get the container for the Three.js scene (this is now always fixed and full screen)
+            const container = document.getElementById('three-container');
+
+            // --- Scene Setup ---
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight); // Renderer always takes full window size
+            container.appendChild(renderer.domElement);
+            renderer.setClearColor(0x1a202c, 1); // Dark background for the renderer
+
+            // --- Object Creation (Professional Metallic Cube) ---
+            const geometry = new THREE.BoxGeometry(1, 1, 1);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x808080,    // Neutral gray
+                metalness: 0.7,     // Metallic look
+                roughness: 0.3      // Smooth/shiny surface
+            });
+            const cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            // --- Lighting ---
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(0, 1, 1);
+            scene.add(directionalLight);
+            const pointLight = new THREE.PointLight(0xff00ff, 0.5); // Magenta point light
+            pointLight.position.set(-5, 2, -3);
+            scene.add(pointLight);
+            const pointLight2 = new THREE.PointLight(0x00ffff, 0.5); // Cyan point light
+            pointLight2.position.set(5, -2, -3);
+            scene.add(pointLight2);
+
+            // --- Scroll Animation Logic ---
+            let scrollY = window.scrollY;
+
+            window.addEventListener('scroll', () => {
+                scrollY = window.scrollY;
+            });
+
+            // --- Animation Loop ---
+            function animate() {
+                requestAnimationFrame(animate);
+
+                cube.rotation.x += 0.005;
+                cube.rotation.y += 0.005;
+
+                const totalScrollHeight = document.body.scrollHeight - window.innerHeight;
+                const normalizedScroll = totalScrollHeight > 0 ? scrollY / totalScrollHeight : 0;
+
+                // Adjust cube's position (e.g., move up/down slightly)
+                cube.position.y = Math.sin(normalizedScroll * Math.PI * 4) * 0.5;
+
+                // Adjust cube's scale (e.g., gets slightly bigger/smaller)
+                const scaleFactor = 1 + Math.sin(normalizedScroll * Math.PI * 2) * 0.2;
+                cube.scale.set(scaleFactor, scaleFactor, scaleFactor);
+
+                renderer.render(scene, camera);
+            }
+
+            // --- Handle Window Resizes ---
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+                renderer.render(scene, camera);
+            });
+
+            // Start the animation loop
+            animate();
+        };
+    </script>
 </body>
-</html>
+  </html>
+              
