@@ -25,10 +25,10 @@
       position: relative;
       text-align: center;
     }
-    .hero canvas {
+    #three-container {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
@@ -68,10 +68,10 @@
         max-width: 40%;
         padding: 0;
       }
-      .hero canvas {
-        position: static;
+      #three-container {
         width: 60%;
         height: 100%;
+        position: relative;
       }
     }
   </style>
@@ -82,7 +82,7 @@
       <h1>Creative 3D Experience</h1>
       <p>Scroll down to explore the immersive layout powered by 3D and motion.</p>
     </div>
-    <canvas id="bg"></canvas>
+    <div id="three-container"></div>
   </div>
 
   <div class="section">Scroll Section One</div>
@@ -92,11 +92,14 @@
   <script type="module">
     import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js';
 
+    const container = document.getElementById('three-container');
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg'), alpha: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
 
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
@@ -112,14 +115,15 @@
     function animate() {
       requestAnimationFrame(animate);
       cube.rotation.y += 0.01;
+      cube.rotation.x += 0.005;
       renderer.render(scene, camera);
     }
     animate();
 
     window.addEventListener('resize', () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.aspect = container.clientWidth / container.clientHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setSize(container.clientWidth, container.clientHeight);
     });
   </script>
 </body>
