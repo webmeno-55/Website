@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Recreation</title>
+    <title>Accurate Logo Recreation</title>
     <style>
         body {
             display: flex;
@@ -11,184 +11,142 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            background-color: #f0f0f0; /* Light background to make logo visible */
-            overflow: hidden; /* Prevent scrollbars if elements go slightly off-screen */
+            background-color: #f0f0f0; /* Light background */
+            overflow: hidden; /* Prevent unwanted scrollbars */
         }
 
-        .logo-container {
+        .logo-wrapper {
             position: relative;
-            width: 400px; /* Adjust overall size */
-            height: 300px; /* Adjust overall size */
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 450px; /* Adjust this to scale the entire logo */
+            height: 300px; /* Adjust this to scale the entire logo */
+            /* Outline for debugging, remove in final */
+            /* border: 1px solid blue; */
         }
 
         .stripe {
-            position: absolute; /* Allows for precise positioning */
-            background-color: black; /* Default, will be overridden */
-        }
-
-        /* --- Left Wing (White/Grey) --- */
-        .left-wing {
             position: absolute;
-            left: 0;
-            /* transform: translateX(-50%) rotateY(180deg); This was a thought, but individual rotations are easier */
+            height: 20px; /* Fixed height for all stripes for consistency */
+            transform-origin: 0% 0%; /* Rotate from the top-left corner of the div */
         }
 
-        .white-1 {
-            width: 150px;
-            height: 20px;
+        /* --- Left Side (White/Grey Stripes) --- */
+        .left-stripe-1 {
+            width: 180px;
             background-color: #e0e0e0; /* Lightest grey */
             transform: rotate(-45deg);
-            top: -50px;
-            left: -100px;
+            top: 40px;
+            left: -10px;
         }
-
-        .white-2 {
-            width: 130px;
-            height: 20px;
+        .left-stripe-2 {
+            width: 160px;
             background-color: #d0d0d0;
             transform: rotate(-45deg);
-            top: -10px;
-            left: -80px;
+            top: 70px;
+            left: 10px;
         }
-
-        .white-3 {
-            width: 110px;
-            height: 20px;
+        .left-stripe-3 {
+            width: 140px;
             background-color: #c0c0c0;
             transform: rotate(-45deg);
-            top: 30px;
-            left: -60px;
+            top: 100px;
+            left: 30px;
         }
-
-        .white-4 {
-            width: 90px;
-            height: 20px;
+        .left-stripe-4 {
+            width: 120px;
             background-color: #b0b0b0; /* Darker grey */
             transform: rotate(-45deg);
-            top: 70px;
-            left: -40px;
+            top: 130px;
+            left: 50px;
         }
 
-        /* --- Middle V-Shape (Red/Black) --- */
-        .middle-v {
-            position: absolute;
-            /* This section needs careful positioning to meet the left and right wings */
-        }
-
-        .middle-red {
-            width: 60px;
-            height: 20px;
-            background-color: #e60000; /* Bright Red */
-            transform: rotate(45deg); /* Angle to match the V */
-            top: 80px;
-            left: -30px; /* Adjust to connect with the left wing's end */
-            z-index: 2; /* Bring to front */
-        }
-
-        .middle-black-top {
+        /* --- Middle V-Section (Red/Black) --- */
+        .middle-v-red {
             width: 80px;
-            height: 20px;
+            background-color: #e60000; /* Bright Red */
+            transform: rotate(45deg);
+            top: 160px;
+            left: 95px; /* Aligns with the bottom of the last grey stripe */
+            z-index: 2; /* Ensures it's above other elements if needed */
+        }
+
+        .middle-v-black-top {
+            width: 90px;
             background-color: #000; /* Black */
+            transform: rotate(45deg);
+            top: 130px; /* Positions it slightly above and to the left of the red */
+            left: 75px;
+            z-index: 1;
+        }
+
+        .middle-v-black-bottom {
+            width: 90px;
+            background-color: #000; /* Black */
+            transform: rotate(45deg);
+            top: 190px; /* Positions it slightly below and to the right of the red */
+            left: 115px;
+            z-index: 1;
+        }
+
+        /* --- Right Side (Black/Red Stripes) --- */
+        .right-stripe-1 {
+            width: 180px;
+            background-color: #000;
             transform: rotate(45deg);
             top: 40px;
-            left: -50px; /* Adjust positioning */
-            z-index: 1;
-        }
-
-        .middle-black-bottom {
-            width: 80px;
-            height: 20px;
-            background-color: #000; /* Black */
-            transform: rotate(45deg);
-            top: 120px;
-            left: -10px; /* Adjust positioning */
-            z-index: 1;
-        }
-
-
-        /* --- Right Wing (Black/Red) --- */
-        .right-wing {
-            position: absolute;
-            right: 0;
-            /* This section will have elements rotating the opposite way */
-        }
-
-        .black-top-1 {
-            width: 150px;
-            height: 20px;
-            background-color: #000;
-            transform: rotate(45deg);
-            top: -50px;
-            right: -100px; /* Adjust position relative to right edge */
+            left: 280px; /* Start further right to align with the angle */
             z-index: 2;
         }
-
-        .black-top-2 {
-            width: 130px;
-            height: 20px;
+        .right-stripe-2 {
+            width: 160px;
             background-color: #000;
-            transform: rotate(45deg);
-            top: -10px;
-            right: -80px;
-            z-index: 2;
-        }
-
-        .black-top-3 {
-            width: 110px;
-            height: 20px;
-            background-color: #000;
-            transform: rotate(45deg);
-            top: 30px;
-            right: -60px;
-            z-index: 2;
-        }
-
-        .red-bottom {
-            width: 90px;
-            height: 20px;
-            background-color: #e60000; /* Bright Red */
             transform: rotate(45deg);
             top: 70px;
-            right: -40px;
-            z-index: 3; /* Ensure red is on top of black if they overlap slightly */
+            left: 300px;
+            z-index: 2;
         }
-
-        .black-bottom-1 {
-            width: 70px;
-            height: 20px;
+        .right-stripe-3 {
+            width: 140px;
             background-color: #000;
             transform: rotate(45deg);
-            top: 110px;
-            right: -20px;
+            top: 100px;
+            left: 320px;
+            z-index: 2;
+        }
+        .right-stripe-red {
+            width: 120px;
+            background-color: #e60000; /* Bright Red */
+            transform: rotate(45deg);
+            top: 130px;
+            left: 340px;
+            z-index: 3; /* On top of black */
+        }
+        .right-stripe-4 {
+            width: 100px;
+            background-color: #000;
+            transform: rotate(45deg);
+            top: 160px;
+            left: 360px;
             z-index: 2;
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <div class="left-wing">
-            <div class="stripe white-1"></div>
-            <div class="stripe white-2"></div>
-            <div class="stripe white-3"></div>
-            <div class="stripe white-4"></div>
-        </div>
+    <div class="logo-wrapper">
+        <div class="stripe left-stripe-1"></div>
+        <div class="stripe left-stripe-2"></div>
+        <div class="stripe left-stripe-3"></div>
+        <div class="stripe left-stripe-4"></div>
 
-        <div class="middle-v">
-            <div class="stripe middle-red"></div>
-            <div class="stripe middle-black-top"></div>
-            <div class="stripe middle-black-bottom"></div>
-        </div>
+        <div class="stripe middle-v-black-top"></div>
+        <div class="stripe middle-v-red"></div>
+        <div class="stripe middle-v-black-bottom"></div>
 
-        <div class="right-wing">
-            <div class="stripe black-top-1"></div>
-            <div class="stripe black-top-2"></div>
-            <div class="stripe black-top-3"></div>
-            <div class="stripe red-bottom"></div>
-            <div class="stripe black-bottom-1"></div>
-        </div>
+
+        <div class="stripe right-stripe-1"></div>
+        <div class="stripe right-stripe-2"></div>
+        <div class="stripe right-stripe-3"></div>
+        <div class="stripe right-stripe-red"></div>
+        <div class="stripe right-stripe-4"></div>
     </div>
 </body>
 </html>
