@@ -1,38 +1,160 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <style>
-    body{
-      background: #000;
-    }
-    .menu_btn {
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: .2rem;
-      width: 5rem;
-      position: relative;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webmeno Logo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .line {
-      postion: absolute:
-      left: 0;
-      width: 100%;
-      height: 4rem;
-      background-color: #fff;
-      clip-path: polygon(100% 90%, 100% 100%, 0% 100%, 0% 90%);
-      transform: skewX(-15deg); /* Makes both ends slant in same direction */
-    }
-  </style>
+        body {
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .red{
+        Background:red;
+        }
+
+        .white{
+        Background: white;
+        }
+
+       .gr_black_white{
+             
+             background-image: linear-gradient(#3d3d3d, #000);
+       }
+
+        .logo {
+            display: flex;
+            Border:2px solid red;
+        }
+
+        /* Left -------------------------- */
+
+
+
+
+            .left{
+              Position: relative;
+        }
+
+        .line6 , .line7 , .line8 , .line9 , .line10{
+        Position: absolute;
+        clip-path: polygon(0 9%, 0 0, 100% 91%, 100% 100%);
+        Width:10rem;
+        Height:10rem;
+        Right: 0;
+        }
+
+        .line6{
+        Position: absolute;
+        Top:0;
+        
+        Width:10rem;
+        Height:10rem;
+        }
+        
+        .line7{
+        Position: absolute;
+        Top:2rem;
+        
+        Width:10rem;
+        Height:10rem;
+        }
+
+        .line8{
+        Position: absolute;
+        Top:4rem;
+        
+        Width:10rem;
+        Height:10rem;
+        }
+
+        .line9{
+                Top: 6rem;
+        }
+
+        .line10{
+                Top: 8rem;
+        }
+
+
+
+
+/* Right -------------------------------------- */
+
+        .right{
+              Position: relative;
+        }
+
+        .line1 , .line2 , .line3 , .line4 , .line5{
+        Position: absolute;
+        clip-path: polygon(100% 0, 100% 9%, 0 100%, 0 89%);
+        Width:10rem;
+        Height:10rem;
+        Left :0;
+        }
+
+        .line1{
+        Position: absolute;
+        Top:0;
+        clip-path: polygon(100% 0, 100% 9%, 0 100%, 0 89%);
+        Width:10rem;
+        Height:10rem;
+        }
+        
+        .line2{
+        Position: absolute;
+        Top:2rem;
+        clip-path: polygon(100% 0, 100% 9%, 0 100%, 0 89%);
+        Width:10rem;
+        Height:10rem;
+        }
+
+        .line3{
+        Position: absolute;
+        Top:4rem;
+        clip-path: polygon(100% 0, 100% 9%, 0 100%, 0 89%);
+        Width:10rem;
+        Height:10rem;
+        }
+
+        .line4{
+                Top: 6rem;
+        }
+
+        .line5{
+                Top: 8rem;
+        }
+
+      
+
+        
+    </style>
 </head>
 <body>
-  <div class="menu_btn">
-    <div class="line" style="top: 0;"></div>
-  <div class="line" style="top: .3rem;"></div>
-  <div class="line" style="top: 1rem;"></div>
-  </div>
-  
+    <div class="logo">
+       <div class="left">
+              <div class="line6 gr_black_white"></div>
+             <div class="line7 gr_black_white"></div>
+             <div class="line8 gr_black_white"></div>
+             <div class="line9 gr_black_white"></div>
+             <div class="line10 gr_black_white"></div>
+       </div>
+       <div class="right">
+             <div class="line1 white"></div>
+             <div class="line2 white"></div>
+             <div class="line3 white"></div>
+             <div class="line4 red"></div>
+             <div class="line5 white"></div>
+       </div>
+    </div>
 </body>
 </html>
