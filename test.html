@@ -3,287 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Scroll Animation - Black Gradient</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js CDN for 3D rendering -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Logo Recreation</title>
     <style>
-        /* Custom CSS for body to ensure full height and prevent horizontal scroll */
         body {
-            margin: 0;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            font-family: 'Inter', sans-serif; /* Use Inter font */
-            background-color: #000000; /* Pure black background for the entire page */
-            color: #e2e8f0; /* Light text color for readability */
-        }
-
-        /* Base styles for content sections */
-        .content-section {
-            height: 100vh; /* Each section fills the viewport height */
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center; /* Center text for all content sections on mobile/default */
-            padding: 2rem;
-            box-sizing: border-box;
-            color: #e2e8f0; /* Light text color */
-            /* Gradient shades of black for content sections */
-            background: linear-gradient(180deg, #1a1a1a, #0d0d0d); /* From dark gray to darker gray */
-        }
-        /* Alternate gradient for even content sections */
-        .content-section:nth-child(even) {
-            background: linear-gradient(180deg, #0d0d0d, #000000); /* From darker gray to pure black */
-        }
-
-        /* Specific styling for headings and paragraphs */
-        h2 {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #a0aec0; /* Lighter gray for headings */
-        }
-        p {
-            font-size: 1.25rem;
-            line-height: 1.75;
-            max-width: 800px;
-            margin-top: 1rem;
-        }
-
-        /* --- First Section Specific Styles --- */
-        /* This wrapper handles the responsive layout for the first section */
-        .first-section-wrapper {
             min-height: 100vh;
-            display: flex;
-            flex-direction: column; /* Stack columns on mobile (text on top of animation background) */
-            position: relative; /* Essential for positioning the 3D container as background */
+            margin: 0;
+            background-color: #f0f0f0; /* Light background to make logo visible */
+            overflow: hidden; /* Prevent scrollbars if elements go slightly off-screen */
         }
 
-        /* The Three.js container */
-        #three-container {
-            /* Mobile: Absolute positioning to cover the entire first section as a background */
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0; /* Place it behind the text content */
-            display: flex; /* Used to center the cube within its bounds */
+        .logo-container {
+            position: relative;
+            width: 400px; /* Adjust overall size */
+            height: 300px; /* Adjust overall size */
+            display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden; /* Hide anything outside the container */
-            background-color: #111111; /* Very dark gray for the 3D section base */
-        }
-        #three-container canvas {
-            display: block;
-            width: 100%;
-            height: 100%;
         }
 
-        /* Text column in the first section */
-        .text-column {
-            width: 100%; /* Full width on mobile */
-            z-index: 10; /* Place text above the 3D background */
-            flex-grow: 1; /* Allows text column to take available space */
-            display: flex;
-            align-items: center;
-            justify-content: center; /* Center text content horizontally and vertically on mobile */
-            padding: 2rem;
-            box-sizing: border-box;
-            /* Semi-transparent black background for text on mobile for readability over animation */
-            background-color: rgba(10, 10, 10, 0.9);
-            border-radius: 0.5rem; /* Rounded corners for consistency */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        .text-column .max-w-xl {
-            text-align: center; /* Ensure text is centered within the max-width div on mobile */
+        .stripe {
+            position: absolute; /* Allows for precise positioning */
+            background-color: black; /* Default, will be overridden */
         }
 
-        /* Desktop specific styles for the first section */
-        @media (min-width: 768px) { /* Tailwind's 'md' breakpoint */
-            .first-section-wrapper {
-                flex-direction: row; /* Arrange columns horizontally on desktop */
-            }
-            #three-container {
-                /* Desktop: Becomes the right half, relative within flex container */
-                position: relative;
-                width: 50%;
-                height: 100%;
-                z-index: initial; /* Reset z-index */
-            }
-            .text-column {
-                width: 50%; /* Text takes left half on desktop */
-                text-align: left; /* Align text to left on desktop */
-                justify-content: flex-start; /* Align content to the start (left) */
-                /* Fully opaque black background on desktop for solid appearance */
-                background-color: #000000;
-                border-radius: 0.5rem 0 0 0.5rem; /* Rounded corners on left side only */
-                box-shadow: none; /* Remove shadow on desktop for cleaner split */
-            }
-            .text-column .max-w-xl {
-                text-align: left; /* Ensure text is left-aligned within the max-width div on desktop */
-            }
+        /* --- Left Wing (White/Grey) --- */
+        .left-wing {
+            position: absolute;
+            left: 0;
+            /* transform: translateX(-50%) rotateY(180deg); This was a thought, but individual rotations are easier */
+        }
+
+        .white-1 {
+            width: 150px;
+            height: 20px;
+            background-color: #e0e0e0; /* Lightest grey */
+            transform: rotate(-45deg);
+            top: -50px;
+            left: -100px;
+        }
+
+        .white-2 {
+            width: 130px;
+            height: 20px;
+            background-color: #d0d0d0;
+            transform: rotate(-45deg);
+            top: -10px;
+            left: -80px;
+        }
+
+        .white-3 {
+            width: 110px;
+            height: 20px;
+            background-color: #c0c0c0;
+            transform: rotate(-45deg);
+            top: 30px;
+            left: -60px;
+        }
+
+        .white-4 {
+            width: 90px;
+            height: 20px;
+            background-color: #b0b0b0; /* Darker grey */
+            transform: rotate(-45deg);
+            top: 70px;
+            left: -40px;
+        }
+
+        /* --- Middle V-Shape (Red/Black) --- */
+        .middle-v {
+            position: absolute;
+            /* This section needs careful positioning to meet the left and right wings */
+        }
+
+        .middle-red {
+            width: 60px;
+            height: 20px;
+            background-color: #e60000; /* Bright Red */
+            transform: rotate(45deg); /* Angle to match the V */
+            top: 80px;
+            left: -30px; /* Adjust to connect with the left wing's end */
+            z-index: 2; /* Bring to front */
+        }
+
+        .middle-black-top {
+            width: 80px;
+            height: 20px;
+            background-color: #000; /* Black */
+            transform: rotate(45deg);
+            top: 40px;
+            left: -50px; /* Adjust positioning */
+            z-index: 1;
+        }
+
+        .middle-black-bottom {
+            width: 80px;
+            height: 20px;
+            background-color: #000; /* Black */
+            transform: rotate(45deg);
+            top: 120px;
+            left: -10px; /* Adjust positioning */
+            z-index: 1;
+        }
+
+
+        /* --- Right Wing (Black/Red) --- */
+        .right-wing {
+            position: absolute;
+            right: 0;
+            /* This section will have elements rotating the opposite way */
+        }
+
+        .black-top-1 {
+            width: 150px;
+            height: 20px;
+            background-color: #000;
+            transform: rotate(45deg);
+            top: -50px;
+            right: -100px; /* Adjust position relative to right edge */
+            z-index: 2;
+        }
+
+        .black-top-2 {
+            width: 130px;
+            height: 20px;
+            background-color: #000;
+            transform: rotate(45deg);
+            top: -10px;
+            right: -80px;
+            z-index: 2;
+        }
+
+        .black-top-3 {
+            width: 110px;
+            height: 20px;
+            background-color: #000;
+            transform: rotate(45deg);
+            top: 30px;
+            right: -60px;
+            z-index: 2;
+        }
+
+        .red-bottom {
+            width: 90px;
+            height: 20px;
+            background-color: #e60000; /* Bright Red */
+            transform: rotate(45deg);
+            top: 70px;
+            right: -40px;
+            z-index: 3; /* Ensure red is on top of black if they overlap slightly */
+        }
+
+        .black-bottom-1 {
+            width: 70px;
+            height: 20px;
+            background-color: #000;
+            transform: rotate(45deg);
+            top: 110px;
+            right: -20px;
+            z-index: 2;
         }
     </style>
 </head>
 <body>
-
-    <!-- First Section: Contains the 3D animation and text content -->
-    <section class="first-section-wrapper">
-        <!-- This div is the 3D animation container. It will be background on mobile, right on desktop. -->
-        <div id="three-container">
-            <!-- Canvas will be appended here by Three.js -->
+    <div class="logo-container">
+        <div class="left-wing">
+            <div class="stripe white-1"></div>
+            <div class="stripe white-2"></div>
+            <div class="stripe white-3"></div>
+            <div class="stripe white-4"></div>
         </div>
 
-        <!-- Text Content Column -->
-        <div class="text-column">
-            <div class="max-w-xl mx-auto">
-                <h2 class="text-5xl font-extrabold mb-4 text-white">Interactive 3D Experience</h2>
-                <p class="text-xl leading-relaxed text-gray-300">
-                    Witness the power of dynamic web design. This immersive 3D animation
-                    reacts to your scroll, offering a unique visual journey, adapting seamlessly
-                    across desktop and mobile devices.
-                </p>
-            </div>
+        <div class="middle-v">
+            <div class="stripe middle-red"></div>
+            <div class="stripe middle-black-top"></div>
+            <div class="stripe middle-black-bottom"></div>
         </div>
-    </section>
 
-    <!-- Sample content sections (simple, solid background with gradient shades of black) -->
-    <section class="content-section">
-        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
-            <h2 class="text-5xl font-extrabold mb-4">Welcome to our Dynamic Page</h2>
-            <p class="text-xl leading-relaxed">
-                Scroll down to see the magic happen! Our 3D model is featured prominently
-                in the section above. These sections provide additional content space.
-            </p>
+        <div class="right-wing">
+            <div class="stripe black-top-1"></div>
+            <div class="stripe black-top-2"></div>
+            <div class="stripe black-top-3"></div>
+            <div class="stripe red-bottom"></div>
+            <div class="stripe black-bottom-1"></div>
         </div>
-    </section>
-
-    <section class="content-section">
-        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
-            <h2 class="text-5xl font-extrabold mb-4">Explore New Dimensions</h2>
-            <p class="text-xl leading-relaxed">
-                The digital world is vast and full of possibilities. Here, you can
-                showcase more information or engaging content without the 3D element.
-            </p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
-            <h2 class="text-5xl font-extrabold mb-4">Interactive Experiences</h2>
-            <p class="text-xl leading-relaxed">
-                We believe in creating engaging and memorable web experiences.
-                This structure allows for a strong visual impact in the hero section,
-                followed by clear content presentation.
-            </p>
-        </div>
-    </section>
-
-    <section class="content-section">
-        <div class="max-w-4xl mx-auto rounded-lg shadow-lg p-6" style="background-color: #222222;">
-            <h2 class="text-5xl font-extrabold mb-4">The End (for now)</h2>
-            <p class="text-xl leading-relaxed">
-                You've reached the end of our scroll demonstration. We hope you enjoyed
-                the focused 3D experience and the structured layout.
-            </p>
-        </div>
-    </section>
-
-    <script>
-        // Ensure the script runs after the window has loaded
-        window.onload = function() {
-            // Get the container for the Three.js scene
-            const container = document.getElementById('three-container');
-
-            // --- Scene Setup ---
-            const scene = new THREE.Scene();
-            // Camera aspect ratio and renderer size will be set dynamically based on container
-            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.z = 5;
-
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            container.appendChild(renderer.domElement);
-            renderer.setClearColor(0x111111, 1); // Very dark gray background for the 3D section itself
-
-            // --- Object Creation (Professional Metallic Cube) ---
-            const geometry = new THREE.BoxGeometry(1, 1, 1);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x808080,    // Neutral gray
-                metalness: 0.7,     // Metallic look
-                roughness: 0.3      // Smooth/shiny surface
-            });
-            const cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
-
-            // --- Lighting ---
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight.position.set(0, 1, 1);
-            scene.add(directionalLight);
-            const pointLight = new THREE.PointLight(0xff00ff, 0.5); // Magenta point light
-            pointLight.position.set(-5, 2, -3);
-            scene.add(pointLight);
-            const pointLight2 = new THREE.PointLight(0x00ffff, 0.5); // Cyan point light
-            pointLight2.position.set(5, -2, -3);
-            scene.add(pointLight2);
-
-            // --- Scroll Animation Logic ---
-            let scrollY = window.scrollY;
-
-            window.addEventListener('scroll', () => {
-                scrollY = window.scrollY;
-            });
-
-            // --- Animation Loop ---
-            function animate() {
-                requestAnimationFrame(animate);
-
-                cube.rotation.x += 0.005;
-                cube.rotation.y += 0.005;
-
-                // Only apply scroll effect if the 3D section is in view
-                const firstSection = document.querySelector('.first-section-wrapper');
-                if (firstSection) {
-                    const rect = firstSection.getBoundingClientRect();
-                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-
-                    if (isVisible) {
-                        const sectionHeight = firstSection.clientHeight;
-                        const sectionTop = firstSection.offsetTop;
-                        const scrollProgressInSection = Math.max(0, Math.min(1, (scrollY - sectionTop + window.innerHeight) / (sectionHeight + window.innerHeight)));
-
-                        cube.position.y = Math.sin(scrollProgressInSection * Math.PI * 4) * 0.5;
-                        const scaleFactor = 1 + Math.sin(scrollProgressInSection * Math.PI * 2) * 0.2;
-                        cube.scale.set(scaleFactor, scaleFactor, scaleFactor);
-                    }
-                }
-
-                renderer.render(scene, camera);
-            }
-
-            // --- Handle Window Resizes ---
-            window.addEventListener('resize', () => {
-                const containerWidth = container.clientWidth;
-                const containerHeight = container.clientHeight;
-
-                camera.aspect = containerWidth / containerHeight;
-                camera.updateProjectionMatrix();
-
-                renderer.setSize(containerWidth, containerHeight);
-                renderer.render(scene, camera);
-            });
-
-            // Initial setup for renderer and camera size based on container's initial dimensions
-            const initialContainerWidth = container.clientWidth;
-            const initialContainerHeight = container.clientHeight;
-            camera.aspect = initialContainerWidth / initialContainerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(initialContainerWidth, initialContainerHeight);
-
-            // Start the animation loop
-            animate();
-        };
-    </script>
+    </div>
 </body>
 </html>
