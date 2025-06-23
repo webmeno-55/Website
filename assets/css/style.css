@@ -1,1 +1,400 @@
-hello
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Kumbh Sans", sans-serif;
+}
+
+body {
+    background: #F1DEDE;
+}
+
+/* Back to top */
+.back_to_top button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(20, 20, 20);
+    border: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 0px 4px rgba(180, 160, 255, 0.253);
+    cursor: pointer;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+.back_to_top .svgIcon {
+    width: 12px;
+    transition-duration: 0.3s;
+}
+
+.back_to_top .svgIcon path {
+    fill: white;
+}
+
+.back_to_top button:hover {
+    width: 140px;
+    border-radius: 50px;
+    transition-duration: 0.3s;
+    background-color: rgb(181, 160, 255);
+    align-items: center;
+}
+
+.back_to_top button:hover .svgIcon {
+    transition-duration: 0.3s;
+    transform: translateY(-200%);
+}
+
+.back_to_top button::before {
+    position: absolute;
+    bottom: -20px;
+    content: "Back to Top";
+    color: white;
+    font-size: 0px;
+}
+
+.back_to_top button:hover::before {
+    font-size: 13px;
+    opacity: 1;
+    bottom: unset;
+    transition-duration: 0.3s;
+}
+
+/* Back to top End */
+
+
+/* Navbar Start */
+.navbar {
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: #d4baba !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand img {
+    transition: all 0.3s ease;
+}
+
+.navbar.scrolled .logo-default {
+    display: none;
+}
+
+.navbar:not(.scrolled) .logo-scrolled {
+    display: none;
+}
+
+/* No specific display rules needed for .navbar-toggler or .navbar-nav here */
+/* Bootstrap will handle their display based on the absence of navbar-expand-lg */
+
+.navbar-toggler {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0.5rem;
+    position: relative;
+    z-index: 9;
+}
+
+.menu-icon {
+    color: white;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.navbar.scrolled .menu-icon {
+    color: #333;
+}
+
+.offcanvas {
+    background-color: #000;
+    width: 250px;
+    padding-bottom: 2rem;
+}
+
+.offcanvas-body {
+    color: #fff;
+    z-index: 10;
+}
+
+.offcanvas-body a {
+    text-decoration: none;
+}
+
+.offcanvas.show~.navbar-toggler .menu-icon {
+    display: none;
+}
+
+.offcanvas-header .btn-close {
+    filter: invert(1);
+    opacity: 1;
+}
+
+.nav_client_btn {
+    position: relative;
+    padding: .3rem 2rem;
+    font-size: .9rem;
+    margin-top: 1rem;
+    color: #ffffff;
+    background: linear-gradient(to bottom, #171717, #242424);
+    border-radius: 9999px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1), 0 10px 20px rgba(0, 0, 0, 0.4);
+    transition: all 0.1s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #292929;
+}
+
+.nav_client_btn::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    background: linear-gradient(to bottom, #292929, #000000);
+    z-index: -1;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    opacity: 1;
+}
+
+.nav_client_btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 1), 0 5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.nav_client_btn .inner-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #171717, #242424);
+    width: 40px;
+    height: 40px;
+    margin-left: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 1);
+    border: 1px solid #252525;
+    transition: all 0.2s ease;
+}
+
+.nav_client_btn .inner-button::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    right: -1px;
+    bottom: -1px;
+    left: -1px;
+    background: linear-gradient(to bottom, #292929, #000000);
+    z-index: -1;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+    opacity: 1;
+}
+
+.nav_client_btn .inner-button .icon {
+    filter: drop-shadow(0 10px 20px rgba(26, 25, 25, 0.9)) drop-shadow(0 0 4px rgba(0, 0, 0, 1));
+    transition: all 0.4s ease-in-out;
+}
+
+.nav_client_btn .inner-button .icon:hover {
+    filter: drop-shadow(0 10px 20px rgba(50, 50, 50, 1)) drop-shadow(0 0 20px rgba(2, 2, 2, 1));
+    transform: rotate(-35deg);
+}
+
+
+
+/* Navbar End */
+
+/* Index Page */
+.home_door_body {
+    padding-top: 7rem;
+}
+
+.home_door {
+    /* margin-top: 10rem; */
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.home_door_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.door_img {
+    width: 20rem;
+}
+
+.door_tag {
+    width: 3rem;
+    transform-origin: top center;
+    animation: swing_animation 4.5s infinite ease-in-out;
+    position: absolute;
+    top: 6rem;
+    margin-left: .5rem;
+}
+
+.door_tag img {
+    width: 100%;
+}
+
+/* Animation */
+@keyframes swing_animation {
+    0% {
+        transform: rotate(10deg);
+    }
+
+    50% {
+        transform: rotate(-10deg);
+    }
+
+    100% {
+        transform: rotate(10deg);
+    }
+}
+
+.home_welcome_text {
+    text-align: center;
+    position: absolute;
+    right: 20%;
+    color: #523737;
+}
+
+.home_welcome_text h2 {
+    font-size: 3rem;
+    font-family: "Ruluko", sans-serif;
+    font-weight: bold;
+}
+
+@media (max-width: 1190px) and (min-width: 1px) {
+    .door_img {
+        width: 13rem;
+    }
+
+    /* .door_tag {
+        width: 1rem;
+        transform-origin: top center;
+        animation: swing_animation 4.5s infinite ease-in-out;
+        position: absolute;
+        top: 6rem;
+        background: red;
+    } */
+
+    .home_welcome_text {
+        position: relative;
+        right: 0;
+        padding-top: 3rem;
+    }
+}
+
+/* Index Page End */
+
+/* Footer */
+.main_footer {
+    padding: 3rem .5rem 3rem .5rem;
+}
+
+.footer_social_links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer_social_links a {
+    color: #000;
+    text-decoration: none;
+}
+
+.footer_social_links_inner {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    font-size: .7rem;
+}
+
+.footer_copywrite {
+    font-size: .8rem;
+    text-align: center;
+    margin-top: 1.5rem;
+    margin-bottom: 3rem;
+    font-size: .9rem;
+}
+
+.footer_copywrite a {
+    text-decoration: none;
+    color: #523737;
+    font-weight: bold;
+}
+
+/* Footer End */
+
+/* Company Profile Page */
+.company_profile_body {
+    margin-top: 7rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.company_profile_body img {
+    width: 30rem;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.company_profile_btn a {
+    text-decoration: none;
+}
+
+.company_profile_btn button {
+    border: 2px solid #292929;
+    background: transparent;
+    padding: .5rem 1rem;
+    transition: all .2s ease-in-out;
+    font-family: "Ruluko", sans-serif;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.company_profile_btn button:hover {
+    background: #292929;
+    color: #fff;
+}
+
+@media (max-width: 1024px) and (min-width: 768px) {
+    .company_profile_body img {
+        width: 20rem;
+    }
+}
+
+@media (max-width: 769px) and (min-width: 200px) {
+    .company_profile_body img {
+        width: 8.5rem;
+    }
+
+    .company_profile_btn button {
+        font-size: .7rem;
+    }
+}
+/* Company Profile Page End */
