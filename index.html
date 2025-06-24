@@ -18,6 +18,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@100..900&family=Ruluko&display=swap"
         rel="stylesheet">
 
+    <!-- AOS cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -52,7 +56,7 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="index.html">
+                            <a class="nav-link text-light" href="home.html">
                                 Home
                             </a>
                         </li>
@@ -78,7 +82,7 @@
                         </li>
                     </ul>
                     <a href="">
-                        <button class="nav_client_btn">
+                        <button class="nav_client_btn" >
                             Client Login
                             <div class="inner-button">
                                 <svg id="Arrow" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" height="30px"
@@ -127,14 +131,14 @@
         <div class="container">
             <div class="home_door_main">
                 <a href="home.html">
-                    <div class="home_door">
+                    <div class="home_door" data-aos="fade-right">
                         <img class="door_img" src="assets/images/door.webp" alt="door">
                         <div class="door_tag">
                             <img src="assets/images/door_tag.webp" alt="door tag" width="100%">
                         </div>
                     </div>
                 </a>
-                <div class="home_welcome_text">
+                <div class="home_welcome_text" data-aos="zoom-in-up">
                     <h2>
                         Hello!
                     </h2>
@@ -150,7 +154,7 @@
 
 
     <!-- Footer -->
-    <footer class="main_footer">
+    <footer class="main_footer" data-aos="fade-up">
         <div class="footer_social_links">
             <a href="">
                 <div class="footer_social_links_inner">
@@ -242,6 +246,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous">
         </script>
+
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- AOS Initialization -->
+    <script>
+        AOS.init({
+            offset: 120,        // offset (in px) from the original trigger point
+            delay: 0,           // values from 0 to 3000, with step 50ms
+            duration: 400,      // values from 0 to 3000, with step 50ms
+            easing: 'ease',     // default easing for AOS animations
+            once: false,        // whether animation should happen only once - while scrolling down
+            mirror: false,      // whether elements should animate out while scrolling past them
+            anchorPlacement: 'top-bottom' // defines which position of the element regarding to window should trigger the animation
+        });
+    </script>
 </body>
 
 </html>
