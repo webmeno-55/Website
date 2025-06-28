@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">
+                            <a class="nav-link text-light" href="about.html">
                                 About
                             </a>
                         </li>
@@ -76,12 +76,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">
+                            <a class="nav-link text-light" href="contact.html">
                                 Contact
                             </a>
                         </li>
                     </ul>
-                    <a href="">
+                    <a href="client_login.html">
                         <button class="nav_client_btn">
                             Client Login
                             <div class="inner-button">
@@ -105,18 +105,22 @@
                     </div>
 
                     <div class="d-flex gap-3 mt-2">
-                        <a class="text-light" href="https://www.facebook.com/profile.php?id=61573678858679">
+                        <a class="text-light" href="https://www.facebook.com/profile.php?id=61573678858679"
+                            target="_blank">
                             <i class="fa-brands fa-facebook"></i>
                         </a>
-                        <a class="text-light" href="https://www.instagram.com/webmeno?igsh=eGVmc2xydzcyeHYy">
+                        <a class="text-light" href="https://www.instagram.com/webmeno" target="_blank">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
 
-                        <a class="text-light" href="https://www.instagram.com/webmeno?igsh=eGVmc2xydzcyeHYy">
+                        <a class="text-light" href="https://youtube.com/@webmenotechnology" target="_blank">
                             <i class="fa-brands fa-youtube"></i>
                         </a>
-                        <a class="text-light" href="https://www.instagram.com/webmeno?igsh=eGVmc2xydzcyeHYy">
+                        <a class="text-light" href="https://github.com/webmeno-55" target="_blank">
                             <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a class="text-light" href="">
+                            <i class="fa-brands fa-linkedin-in"></i>
                         </a>
                     </div>
                 </div>
@@ -132,6 +136,145 @@
     </div>
     <!-- Hero End -->
 
+    <!-- Home Service -->
+    <style>
+        @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
+        .service_card_main {
+            margin-bottom: 2rem;
+        }
+
+        .service_card_body {
+            width: min(75rem, 100%);
+            margin-inline: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+            gap: 2rem;
+        }
+
+        .service_card {
+            width: 23rem;
+            --grad: red, blue;
+            padding: 2rem;
+            background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+            border-radius: 1.5rem;
+            gap: 1.5rem;
+            display: grid;
+            grid-template: 'title icon' 'content content' 'bar bar' / 1fr auto;
+            color: #523737;
+            box-shadow:
+                inset -2px 2px hsl(0 0 100% / 1),
+                -20px 20px 40px hsla(0, 0%, 41%, 0.25);
+        }
+
+
+        .service_card::after {
+            content: "";
+            grid-area: bar;
+            height: 2px;
+            background-image: linear-gradient(90deg, var(--grad));
+        }
+
+        .service_card .title {
+            font-size: 1.2rem;
+            grid-area: title;
+            align-self: end;
+            text-transform: uppercase;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .content p {
+            color: rgb(118, 117, 117);
+            margin-bottom: 0rem;
+            font-size: .8rem;
+            text-align: justify;
+        }
+
+        .service_card .content {
+            grid-area: content;
+        }
+
+        .service_card .icon {
+            grid-area: icon;
+            font-size: 3rem;
+        }
+
+        .icon i {
+            color: transparent;
+            background: linear-gradient(to right, var(--grad));
+            background-clip: text;
+        }
+    </style>
+    <section>
+        <div class="container">
+            <div class="service_card_main">
+                <div class="home_contact_heading">
+                    <h3>
+                        What We Do
+                    </h3>
+                    <p>Our Services</p>
+                </div>
+                <div class="service_card_body">
+                    <div class="service_card">
+                        <div class="title">Website Development</div>
+                        <div class="icon">
+                            ➜
+                            <i class="fa-thin fa-laptop-code"></i>
+                        </div>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente perferendis corporis
+                                tenetur, iusto dolores qui iure cum ut, reprehenderit nemo fugiat deleniti, doloremque
+                                ipsa provident ducimus consectetur officiis mollitia harum!
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="service_card">
+                        <div class="title">Software Development</div>
+                        <div class="icon"><i class="fa-thin fa-shield-check"></i></div>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo libero voluptatum earum
+                                odio minus quae possimus esse culpa eligendi optio, atque mollitia exercitationem nam
+                                excepturi voluptate numquam ratione quasi vero?
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="service_card">
+                        <div class="title">Digital Marketig</div>
+                        <div class="icon"><i class="fa-thin fa-wrench-simple"></i></div>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eaque dignissimos
+                                accusamus cumque pariatur minus quidem esse laborum porro, asperiores blanditiis. Natus
+                                magnam at, itaque fugiat reiciendis voluptatibus voluptates excepturi.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="service_card">
+                        <div class="title">Grafic Design</div>
+                        <div class="icon"><i class="fa-thin fa-wrench-simple"></i></div>
+                        <div class="content">
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur eaque dignissimos
+                                accusamus cumque pariatur minus quidem esse laborum porro, asperiores blanditiis. Natus
+                                magnam at, itaque fugiat reiciendis voluptatibus voluptates excepturi.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Home Service End -->
+
     <!-- Contact -->
     <section>
         <div class="container mt-5">
@@ -143,7 +286,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-4">
-                    <div class="contact_card_body" data-aos="fade-right">
+                    <div class="contact_card_body" data-aos="fade-up">
 
                         <a href="mailto:webmeno55@gmail.com">
                             <div class="contact_card">
@@ -209,32 +352,39 @@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="contact_form" data-aos="fade-left">
-                        <div class="contact_form_input">
-                            <div class="contact_form_input_tag">
-                                Name
+                    <form action="">
+                        <div class="contact_form" data-aos="fade-up">
+                            <div class="contact_form_input">
+                                <div class="contact_form_input_tag">
+                                    Name
+                                </div>
+                                <input type="text" placeholder="Name" required>
                             </div>
-                            <input type="text" placeholder="Name">
-                        </div>
-                        <div class="contact_form_input">
-                            <div class="contact_form_input_tag">
-                                Number
+                            <div class="contact_form_input">
+                                <div class="contact_form_input_tag">
+                                    Number
+                                </div>
+                                <input type="number" placeholder="Number" required>
                             </div>
-                            <input type="number" placeholder="Number">
-                        </div>
-                        <div class="contact_form_input">
-                            <div class="contact_form_input_tag">
-                                Email
+                            <div class="contact_form_input">
+                                <div class="contact_form_input_tag">
+                                    Email
+                                </div>
+                                <input type="email" placeholder="Email">
                             </div>
-                            <input type="email" placeholder="Email">
-                        </div>
-                        <div class="contact_form_input">
-                            <div class="contact_form_input_tag">
-                                Number
+                            <div class="contact_form_input">
+                                <div class="contact_form_input_tag">
+                                    Number
+                                </div>
+                                <textarea placeholder="Write your message"></textarea>
                             </div>
-                            <textarea placeholder="Write your message"></textarea>
+                            <div class="contact_form_btn" data-aos="flip-right">
+                                <button>
+                                    Submit
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -244,17 +394,17 @@
     <!-- Footer -->
     <footer class="main_footer" data-aos="fade-up">
         <div class="footer_social_links">
-            <a href="">
+            <a href="" href="https://www.facebook.com/profile.php?id=61573678858679" target="_blank">
                 <div class="footer_social_links_inner">
                     <i class="fa-brands fa-facebook"></i>
                 </div>
             </a>
-            <a href="">
+            <a href="https://www.instagram.com/webmeno" target="_blank">
                 <div class="footer_social_links_inner">
                     <i class="fa-brands fa-instagram"></i>
                 </div>
             </a>
-            <a href="">
+            <a href="https://github.com/webmeno-55" target="_blank">
                 <div class="footer_social_links_inner">
                     <i class="fa-brands fa-github"></i>
                 </div>
@@ -264,13 +414,11 @@
                     <i class="fa-brands fa-linkedin-in"></i>
                 </div>
             </a>
-            <a href="">
+            <a href="https://youtube.com/@webmenotechnology" target="_blank">
                 <div class="footer_social_links_inner">
                     <i class="fa-brands fa-youtube"></i>
                 </div>
             </a>
-
-
         </div>
         <div class="footer_copywrite">
             ©
