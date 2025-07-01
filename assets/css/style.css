@@ -91,8 +91,6 @@ body {
     display: none;
 }
 
-/* No specific display rules needed for .navbar-toggler or .navbar-nav here */
-/* Bootstrap will handle their display based on the absence of navbar-expand-lg */
 
 .navbar-toggler {
     border: none;
@@ -107,14 +105,19 @@ body {
     color: white;
     font-size: 1.5rem;
     transition: color 0.3s ease;
+    transition: all .1s ease-in-out;
+}
+
+.menu-icon:hover {
+    text-shadow: 0px 0px 5px rgb(127, 127, 127);
 }
 
 .navbar.scrolled .menu-icon {
-    color: #333;
+    color: #523737;
 }
 
 .offcanvas {
-    background-color: #000;
+    background-color: #333;
     width: 250px;
     padding-bottom: 2rem;
 }
@@ -122,6 +125,19 @@ body {
 .offcanvas-body {
     color: #fff;
     z-index: 10;
+    padding: 0;
+}
+
+.nav_items a {
+    padding-left: 1rem;
+}
+
+.nav_items a:hover {
+    background-color: #646464;
+}
+
+.nav_other_items {
+    padding-left: 1rem;
 }
 
 .offcanvas-body a {
@@ -419,10 +435,13 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 2rem;
+    margin-top: 5rem;
 }
 
 .home_contact_heading h3 {
     margin: 0;
+    color: #523737;
+    letter-spacing: .15rem;
 }
 
 .home_contact_heading p {
@@ -510,21 +529,22 @@ input[type=number] {
     width: fit-content;
     border-radius: .7rem;
     margin-bottom: 2rem;
+    padding: .7rem 0;
 }
 
 .contact_form_input input {
     background-color: transparent;
     width: 20rem;
-    height: 4rem;
-    padding: 1rem 1.3rem;
+    height: 2.5rem;
+    padding: 0rem 1.3rem;
     border: 0;
 }
 
 .contact_form_input textarea {
     background-color: transparent;
     width: 20rem;
-    height: 10rem;
-    padding: 1rem 1.3rem;
+    height: 7.5rem;
+    padding: 0rem 1.3rem;
     border: 0;
 }
 
@@ -546,14 +566,15 @@ input[type=number] {
     font-size: .8rem;
 }
 
-.contact_form_btn button{
+.contact_form_btn button {
     background: #523737;
     border: 2px solid #523737;
     color: #fff;
     padding: .5rem 2rem;
     transition: all .1s;
 }
-.contact_form_btn button:hover{
+
+.contact_form_btn button:hover {
     background: transparent;
     border: 2px solid #523737;
     color: #523737;
@@ -569,7 +590,6 @@ input[type=number] {
     .contact_form_input {
         border: 2px solid #aa8e8e;
         position: relative;
-        /* height: 4rem; */
         width: fit-content;
         border-radius: .5rem;
         margin-bottom: 1.5rem;
@@ -577,7 +597,6 @@ input[type=number] {
 
     .contact_form_input input {
         width: 18rem;
-        height: 3rem;
     }
 
     .contact_form_input textarea {
