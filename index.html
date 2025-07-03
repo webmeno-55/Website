@@ -66,7 +66,7 @@
                             </a>
                         </li>
                         <li class="nav-item nav_items">
-                            <a class="nav-link text-light" href="#">
+                            <a class="nav-link text-light" href="services.html">
                                 Services
                             </a>
                         </li>
@@ -192,6 +192,40 @@
     </section>
     <!-- Home Door End -->
 
+    <!-- Home Newslatter -->
+    <section>
+        <div class="container">
+            <div class="home_contact_heading">
+                <h3>
+                    Subscribe
+                </h3>
+                <p>Sign up to get updates.</p>
+            </div>
+            <section>
+                <div class="container">
+                    <div class="home_subscribe">
+                        <div class="home_subscribe_inner">
+                            <form class="home_subscribe_form">
+                                <input class="add-email" type="email" placeholder="enter your email">
+                                <button class="submit-email" type="button">
+                                    <span class="before-submit">Subscribe</span>
+                                    <span class="after-submit">Thank you for subscribing!</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <script>
+                document.querySelector('.submit-email').addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    document.querySelector('.home_subscribe_form').classList.add('done');
+                });
+            </script>
+        </div>
+    </section>
+    <!-- Home Newslatter End -->
 
     <!-- Footer -->
     <footer class="main_footer" data-aos="fade-up">
