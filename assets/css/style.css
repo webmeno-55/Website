@@ -462,6 +462,7 @@ body {
         inset -2px 2px hsl(0 0 100% / 1),
         -20px 20px 40px hsla(0, 0%, 41%, 0.25);
     position: relative;
+    height: 100%;
 }
 
 .service_card_header {
@@ -479,7 +480,7 @@ body {
 }
 
 .service_card_footer {
-    border-bottom: 2px solid red;
+    border-bottom: 2px solid rgb(255, 0, 0);
     padding-bottom: 1rem;
     padding-top: 1rem;
 }
@@ -517,8 +518,19 @@ body {
         padding: 1rem;
     }
 
+    .service_card_header {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 0rem;
+    }
+
     .service_card .title {
         font-size: .8rem;
+    }
+
+    .service_card .icon {
+        grid-area: icon;
+        font-size: 2rem;
     }
 
     .service_card_footer p {
@@ -710,6 +722,94 @@ input[type=number] {
 /* contact End */
 
 /* Home Subscribe */
+.home_subscribe {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home_subscribe_inner {
+    width: 30rem;
+    height: 40px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, .2);
+    border-radius: 60px;
+    overflow: hidden;
+}
+
+.home_subscribe_form {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.home_subscribe_form .add-email {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 20px;
+}
+
+.home_subscribe_form .submit-email {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(100% - 2px);
+    width: 100px;
+    border: none;
+    border-radius: 60px;
+    outline: none;
+    margin: 1px;
+    padding: 0 20px;
+    cursor: pointer;
+    background: #523737;
+    color: #FFFFFF;
+    transition: width .35s ease-in-out,
+        background .35s ease-in-out;
+}
+.home_subscribe_form .submit-email:hover{
+    width: 120px;
+}
+
+.home_subscribe_form.done .submit-email {
+    width: calc(100% - 2px);
+    background: #C0E02E;
+}
+
+.home_subscribe_form .submit-email .before-submit,
+.home_subscribe_form .submit-email .after-submit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 38px;
+    transition: visibility .35s ease-in-out,
+        opacity .35s ease-in-out;
+    font-size: .9rem;
+}
+
+.home_subscribe_form.done .submit-email .before-submit,
+.home_subscribe_form:not(.done) .submit-email .after-submit {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.home_subscribe_form .submit-email .after-submit {
+    transition-delay: .35s;
+}
+
+.home_subscribe_form:not(.done) .submit-email .before-submit,
+.home_subscribe_form.done .submit-email .after-submit {
+    visibility: visible;
+    opacity: 1;
+}
 
 /* Home Subscribe End */
 
