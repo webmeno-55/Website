@@ -1,5 +1,6 @@
 /* Important Font awesome paid link */
 @import url('https://pro.fontawesome.com/releases/v6.0.0-beta1/css/all.css');
+
 * {
     margin: 0;
     padding: 0;
@@ -430,6 +431,104 @@ body {
 
 /* Hero End */
 
+/* Home Services */
+.service_card_main {
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+}
+
+.service_card_body {
+    width: min(75rem, 100%);
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+    gap: 2rem;
+}
+
+.service_card_body a {
+    text-decoration: none;
+}
+
+.service_card {
+    width: 23rem;
+    padding: 2rem;
+    background-image: linear-gradient(to bottom left, #e0e4e5, #f2f6f9);
+    border-radius: 1.5rem;
+    gap: 1.5rem;
+    color: #523737;
+    box-shadow:
+        inset -2px 2px hsl(0 0 100% / 1),
+        -20px 20px 40px hsla(0, 0%, 41%, 0.25);
+    position: relative;
+}
+
+.service_card_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+
+.service_card .title {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.service_card_footer {
+    border-bottom: 2px solid red;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+}
+
+.service_card_footer p {
+    color: rgb(118, 117, 117);
+    margin-bottom: 0rem;
+    font-size: .8rem;
+    text-align: justify;
+}
+
+.service_card .content {
+    grid-area: content;
+}
+
+.service_card .icon {
+    grid-area: icon;
+    font-size: 3rem;
+}
+
+.icon i {
+    color: transparent;
+    background: linear-gradient(to right, red, blue);
+    background-clip: text;
+}
+
+@media (max-width: 769px) and (min-width: 200px) {
+    .service_card_body {
+        gap: 1rem;
+    }
+
+    .service_card {
+        width: 10rem;
+        border-radius: .8rem;
+        padding: 1rem;
+    }
+
+    .service_card .title {
+        font-size: .8rem;
+    }
+
+    .service_card_footer p {
+        margin-bottom: 0rem;
+        font-size: .5rem;
+    }
+}
+
+/* Home Services End */
+
 /* Contact */
 
 .home_contact_heading {
@@ -609,5 +708,9 @@ input[type=number] {
 }
 
 /* contact End */
+
+/* Home Subscribe */
+
+/* Home Subscribe End */
 
 /* Home Page End */
